@@ -1,0 +1,22 @@
+\subsection {Collocates as Force Behind Selection of Antonyms} Since it is possible that selection antomyms for non-modified nouns are based on collocates, Tables 5.1-5 are provided.  They show the top 10 collocates for the each key word as returned by the Corpus of Contemporary American English (COCA).  Singular and plural forms that appear in the top ten are merged.  
+
+The parametrization for COCA searches were as follows:
+\begin {description}
+	\item[] Words(s): 	[at*] [\ldots][nn]
+	\item[] Collocates: 	[nn*] 8 left, 8 right
+	\item[] Sections: 	SPOKEN
+\end {description}
+
+This search finds noun collocates within 8 words left or right of the provided noun (placed where the ellipsis are) in COCA’s corpus of transcribed speech.  This search specifies that [at*], any article, be adjacent to the provided noun.  This limits results to collocates for nouns that are not modified by an adjective.  So if the word were carpet, the search string would be “[at*] [carpet].[nn]” and collocates for red carpet would not be returned, but collocates for the/a/an carpet would be returned.  COCA is restricted to only search through transcribed speech because the SPOKEN section is selected.
+
+A window of 8 left and 8 right raises the plausibility that a word is a collocate of itself (a word might be mentioned in adjacent sentences).  “[at*]” requires the search results to only find collocates for nouns that have an article adjacent to them.  
+
+	Table 5.1. Pen and eraser appear in top opposites and in survey responses and in COCA collocates for pencil.
+
+	Table 5.2. Top 10 COCA collocates for robot.
+	 
+	Table 5.3. Top 10 COCA collocates for sky.
+
+	Table 5.4. Button appears in top opposites and in survey responses and in COCA collocates for zipper.
+
+If selection of best antonym is based on collocation, then there must be some additional rule to account for the fact that the most common collocates are not selected.  In the case of pencil, the most common collocate is paper, and yet that is not the best opposite.  In the case of $sky$, the most common collocate is limit and planes, but those are not salient in responses from respondent.  
