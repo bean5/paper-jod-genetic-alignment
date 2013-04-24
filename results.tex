@@ -1,66 +1,78 @@
 \section {Results}
+\label{results}
 %\textbf{}
-\subsection {Analysis} Since gender differences were only apparent in introspection feedback questions, results will be analyzed as a whole for each question posed to respondents.
+\subsection {Analysis} 
+Since $H_{1}$ concerns the mean count of antonyms for each word, a one-tailed Student's Independent \textit{t}-test will be used here to determine whether the mean count of antonyms for nouns are statistically significantly greater than those for adjectivs.  The threshold for significance adopted here is $0.01$.
 
-\subsection {Age Distribution} Figure ~\ref{fig:gender_distribution} shows the age distribution of the respondents.  Only non-blank and non ``N/A'' responses are considered in the analysis.
-
-The ages range from 18-32.  This provides a single generational view of responses. 
-
-\subsection {Gender Distribution} The gender distribution for this age range is fairly even.  The female:male ratio is 25 : 36 (69\% female). Figure ~\ref{fig:gender_distribution} shows the gender distribution for this age range.
-
-\begin{figure}[here]
-	\centering
-	%\includegraphics[width=0.9\textwidth]{images/gender_distribution.png}
-	\caption{Gender distribution of respondents of ages 18-32 who speak English natively. (Qualtrics-generated)}
-	\label{fig:gender_distribution}
-\end{figure}
-
-\subsection {Charted Responses} As described in methodology, respondents were asked to provide their best opposite for each keyword.  The most common opposites from respondents will be shown in graphs.  Based on these graphs, a most common response will be referred to as best opposite.  Words that are not mentioned more than once as a best opposite are grouped into the Other category.  
- 
-%Note that in some cases N/A is a salient second response; nevertheless, it is never a salient first best response.
-
-\begin{figure}[here]
-	\centering
-	%\includegraphics[width=0.9\textwidth]{images/pencil_responses.png}
-	\caption{Pen is the best antonym for pencil. Eraser is second best.}
-	\label{fig:pencil_responses}
-\end{figure}
+\subsection{Female and Male Responses}
+Tables~\ref{tab:all_adjective}, \ref{tab:all_noun} show the normalized responses and total counts for each set of antonyms while Table~\ref{tab:all_group_stats} shows the group statistics for the two groups.
 
 
-According to respondents, pen is a best antonym for pencil.  Eraser is apparently the second most common antonym.  If selection of antonyms is based on collocation, then these two antonyms for pencil are interesting since in 5.4 a collocate table shows that both these antonyms are in the top 10 collocates for pencil.  The pair $pencil$ \opp $pen$ contrast in terms of manner of functionality; they are both modern writing instruments.  $Pencil$ \opp $eraser$ contrast in a different way, though.  Their intended uses are opposed.
+\input{results-all-responses}
 
-\begin{figure}[here]
-	\centering
-	%\includegraphics[width=0.9\textwidth]{images/robot_responses.png}
-	\caption{Human is the best antonym for robot.  N/A is second best.}
-	\label{fig:robot_responses}
-\end{figure}
+The calculated statistic is as follows:
+	\begin{quote}
+		$t(8)=4.16415, p < 0.00157362$
+	\end{quote}
 
-Robot is an interesting case.  Human is overwhelmingly the best opposite for robot.  However, enough respondents chose to write N/A that it overcomes even animal vying for the status of second best opposite.  This seems to act in a very binary fashion—one or the other, but nothing else.  
+\begin{table}
+	\begin{center}
+		\begin{tabular}{|l|c|c|} \hline
+									& \textbf{Adjectives} 	& \textbf{Nouns}  \\ \hline \hline
+			\textbf{Mean} 			& 5.20					& 11	\\
+			\textbf{SD} 			& 1.30					& 2.828	\\
+			\textbf{Std. Err. Mean} & 0.583					& 1.265	\\
+			\textbf{N} 				& 5						& 5		\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption {Group Statistics.}
+	\label{tab:all_group_stats}
+\end{table}
 
-Future work could contrast such results as these with results for $male$ \opp $female$ to determine whether robot is a new intra-modified noun polarized for binary antonymization.
 
-\begin{figure}[here]
-	\centering
-	%\includegraphics[width=0.9\textwidth]{images/sky_responses.png}
-	\caption{Ground is the best opposite for sky, with earth as runner-up.}
-	\label{fig:sky_responses}
-\end{figure}
+The Welch's \textit{t}-test agrees that there is significance (equal variance not assumed):
+	\begin{quote}
+		$t(5)=4.1642, p < 0.00439413$
+	\end{quote}
 
 
-For sky, ground is the best opposite according to respondents.  Earth receives the status of being second best.  $Sky$ \opp $Ground$ are opposed spatially as are $sky$ \opp $Earth$.  
+\subsection{Female Responses Only}
+Since there were few responses from men, it seems that running the same \textit{t}-test on the responses without the male responses could be of interest as well.  Tables~\ref{tab:female_adjective}, \ref{tab:female_noun} show the normalized responses and total counts for each set of antonyms while Table~\ref{tab:female_group_stats} shows the group statistics for the two groups.
 
-Some of the categories could have been combined, but were not. Ground could be merged with dirt, ocean with sea.  Even if these were to be merged, Ground and earth would be the most salient responses.
 
-\begin{figure}[here]
-	\centering
-	%\includegraphics[width=0.9\textwidth]{images/zipper_responses.png}
-	\caption{Button is the best antonym for zipper. Velcro is second best.}
-	\label{fig:zipper_responses}
-\end{figure}
 
-According to respondents, button is the best antonym for zipper.  The second best antonym is pairing is $zipper$ \opp $Velcro$.  Unlike $pencil$, this set of antonyms fit into one group: contrast in terms of manner of functionality.  
+\input{results-female-responses}
 
+The calculated statistic is as follows (equal variance not assumed):
+	\begin{quote}
+		$t(7.881)=3.55902, p < 0.00461577$ 
+	\end{quote}
+
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{|l|c|c|} \hline
+									& \textbf{Adjectives} 	& \textbf{Nouns}  \\ \hline \hline
+			\textbf{Mean} 			& 4.00					& 7.80	\\
+			\textbf{SD} 			& 1.581					& 1.789	\\
+			\textbf{Std. Err. Mean} & 0.707					& 0.80	\\
+			\textbf{N} 				& 5						& 5		\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption {Group Statistics.}
+	\label{tab:female_group_stats}
+\end{table}
+
+%The Welch's \textit{t}-test agrees that there is significance:
+%	\begin{quote}
+%		$t(6)=4.1831, p < 0.00289675$
+%	\end{quote}
+
+
+
+%\input{results-best-antonyms}
 %\input {results-collocates}
 %\input {results-categorizing}
 %\input {results-introspection}
