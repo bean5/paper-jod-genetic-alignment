@@ -1,31 +1,46 @@
 \section {Methodology}
 %\textbf{}
-An online survey was created consisting of 3 phases: demographic, free-form antonym decisions (10 total), and feedback.  The order of free-form prompts was randomized for every participant.  %A preliminary survey was conducted to discover whether the survey was too long.
 
-\subsection{Survey Distribution} The survey was distributed on the author’s Facebook account to his friends.  It was then reposted on Facebook by two volunteers, both female, thus bringing it to a wider audience.  Since the two volunteers were female, it is no wonder that the ratio of female participation to male participation, as measured by completed surveys, is nearly 3:1 (23 native female : 9 native male).  
+\subsection{Gold Standard}
+Our primary documents contained all verses from the following scripture:
+	\begin{description}
+		\item \textit{King James Bible},
+		\item \textit{Joseph Smith Translation of the Bible},
+		\item \textit{The Book of Mormon} (LDS),
+		\item \textit{The Doctrine \& Covenants} (LDS), and
+		\item \textit{The Pearl of Great Price} (LDS).
+	\end{description}
 
-\subsection{Survey Format and Question Types} Demographic questions requested gender, approximate age, and whether respondent’s native language was English (Yes/No question).  
+As for secondary documents, our documents consisted of all discourses in the \textit{Journal of Discourses}. In total, there are \JoDPagesTotal pages.
 
-%the non-natives did not provide any antonyms that the natives didn't provide, the do not influence the Student's t-test at all. \textit{The only influence they provided to the study was that the ratio of female to male response was higher.}
+\subsection{Algorithm}
+We used a normal \textit{Needleman-Wunsch} genetic algorith, but with variable costs. This produces interesting results which will be described in \ref{conclusion}.
 
-\subsection{Content} 
-The words that were used to elicit responses from respondents are listed in Table~\ref{tab:key-words}.
+\subsubsection{Needleman-Wunsch}
 
-\subsection{Incentive}
-Respondents who completed the survey were given the opportunity to be entered into a raffle for a gift card worth \$20.
 
-\subsubsection{Response Questions}
-The survey consisted of 10 main questions.  Respondents were to provide their one best antonym for the each word. Half (5) of the words were adjectives while the other half were concrete nouns.  They were instructed to provide institutionalized opposites if they themselves believed them to be the best opposites possible. In the case that they could not come up with a opposite, they were instructed to leave it \textit{blank}, write \textit{none}, or write \textit{N/A} (meaning ``not applicable'') in which case their response was not included in the counts since such responses are not antonyms.  Again, future work could focus on this aspect of antonymy.  
+\subsubsection{Lucene Frequencies IFTF?}
 
-\subsection{Response Normalization} It was not uncommon to receive responses that differed only in terms of capitalization, plurality, or part of speech (e.g. chair, Chairs; alive, living).  These were counted to be semantically the same.  The motivation for this is that some forms of abstracts cannoth be pluralized and that antonyms are ``supposed'' to be of the same part of speech.
 
-Although merging decreases the total count of opposites, this mainly impacted the number of opposites for nouns which makes the results in this survey more conservative than they might otherwise be when including the variation caused by inflected word forms.  
+\subsubsection{Right + Left End}
+
+
+
+\subsection{Metric}
+Right end only :( since gold standard only contained right end.
+
+\subsubsection{Accuracy vs. Error}
+The survey consisted of 10 main questions.  Respondents were to provide their one best xyz for the each word. Half (5) of the words were adjectives while the other half were concrete nouns.  They were instructed to provide institutionalized xyz if they themselves believed them to be the best xyz possible. In the case that they could not come up with a xyz, they were instructed to leave it \textit{blank}, write \textit{none}, or write \textit{N/A} (meaning ``not applicable'') in which case their response was not included in the counts since such responses are not xyz.  Again, future work could focus on this aspect of xyz.  
+
+\subsection{Response Normalization} It was not uncommon to receive responses that differed only in terms of capitalization, plurality, or part of speech (e.g. chair, Chairs; alive, living).  These were counted to be semantically the same.  The motivation for this is that some forms of abstracts cannoth be pluralized and that xyz are ``supposed'' to be of the same part of speech.
+
+Although merging decreases the total count of xyz, this mainly impacted the number of xyz for nouns which makes the results in this survey more conservative than they might otherwise be when including the variation caused by inflected word forms.  
 %Thus word groups such as alive and living are referred to collectively as alive/living. 
 
 
 \section{Participant Selection}
 \subsubsection{Native Language}
-Only native native speakers of English are included in the results of this study. It is, nevertheless, interesting to note that the two non-native speakers of English provided \textbf{no} responses that the natives did not provide, hinting at the possibility that even non-natives are keyed into how antonymy functions.  Future work must determine whether this is truly the case. (Level of comprehension of English is probably going to be a key factor.)
+Only native native speakers of English are included in the results of this study. It is, nevertheless, interesting to note that the two non-native speakers of English provided \textbf{no} responses that the natives did not provide, hinting at the possibility that even non-natives are keyed into how xyz functions.  Future work must determine whether this is truly the case. (Level of comprehension of English is probably going to be a key factor.)
 
 \subsubsection{Age}
 This study includes participants between the age of 18 and 32.
