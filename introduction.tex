@@ -1,30 +1,21 @@
 \section {Introduction (and Inspiration/Motivation)}
-In this study, xyz xyz that were accepted before this work are refered to as \textit{institutional} or \textit{traditional} while those that were not are referred to as being \textit{non-institutional} or \textit{non-traditional}. Here, the behavior of nominal xyz will be proven to differ from that of adjectival xyz.  
 
-This study proves the following hypothesis:
+The work of author attribution is applicable and researchable in both secular and non-secular fields. This is true regardless of whether the plagiarism is an exact quote, non-exact quote, paraphrase, or allusion. Collectively, we refer to these as imitations or citations. First we compare various genetic alignment algorithms and their performance. Then we use their output as well as other metadata of the citations to perform a k-means clustering.
+
+In this work, we do not detect imitations; we only aim to align and classify them.
+
+Our primary, or imitable documents, include The Holy Bible KJV, The Holy Bible JST (Joseph Smith Translation), The Book of Mormon, The Doctrine and Covenants, The Pearl of Great Price as sources. Secondary, or imitating documents, that are aligned to the primary documents entail religious discourse texts, 26 volumes of the Journals of Discourse from the 19th (20th?) century. Using a database of pre-aligned citation alignment, type, and scripture reference, we compare various algorithms in terms of error rate. %and perhaps other metrics 
+[For error measures: We focus on only the right position of the alignments since we aim to insert citations where it seems most appropriate for them.] We then determine whether any of the genetic algorithms have the least error for each type of citation.
+
+After determining which version of genetic algorithm works best for each type of citation, we use the metadata of the citations and alignments to cluster them. We found that there were xyz clusters, each corresponding to exact quote, non-exact, paraphrase, or allusion. This empirically demonstrates that given just xyz algorithms, we can discern between types of attribution that is called for. It is not outside the realm of possibilities for future work to use this technique to classify work at run-time before making a conclusion as to the badness of the imitation attempt.
+
+This study aims to prove the following hypothesis:
 	\begin{quote}
-		$H_{1}:$ The mean number of xyz that exist for a noun are greater is greater than the mean number of xyz for an adjective.
+		$H_{1}:$ The error of any of our genetic algorithms is better than the baseline error (xyz\%).
+
+		$H_{2}:$ Given the meta-data of the text, we can classify the type of imitation with xyz\% accuracy.
+
+		$H_{3}:$ Given various genetic algorithms, an ANN can be trained to produce lower error rates on citation alignments than either of them alone.
 	\end{quote}
 
-\subsection{Impact}
-Proving this hypothesis enhances our understanding of not only xyz, but of how we perceive our world.  The way in which we might describe the as we move through time, making judgements as to what is similar, disimilar, or xyz would seem to be an on-going process in life.
-
-It could be posited that knowing the relationships (synonyms, xyz) between words would allow a speaker to get by with less. When it comes to definitions, it might be that words are linked in the brain to a shared definition, allowing a compression.  Indeed, leveraging knowledge of one word and its relationship with another is one way for a non-native to get by with less.  (For example, instead of remembering the word \textit {toaster}, one might opt to use the \textit {small non-oven crisping device}\footnotemark.)  Perhaps this memory compression technique of synonym could be used in conjunction with xyz.  Thus, proving $H_{1}$ would lend credence to semantic primitives, especially since there is a particular semantic primitive, NOT\footnotemark,~\cite{Wierzbicka}, which promises 50\% compression for dichotomous word pairs.
-
-In order to understand the full import of findings on nominal xyz, various characterisitcs concerning \textit{abstract xyz} will now be provided. Although mathematical terms are used where possible, understanding them is not necessary for understanding the study.  However, they would be key to future research.
-
-\footnotetext[1]{}
-\footnotetext[2]{}
-
-\subsection {Classification: Gradable vs. Non-gradable}
-\label{classification}
-Two main types of xyz exist: gradable and non-gradable. Bertocchi calls gradable xyz \textit{contraries}, while non-gradable xyz are \textit{contradictories}.   Non-gradables, or contradictories are binary, but also have no middle ground \cite{Bertocchi}.  By this criterion, $alive\sim dead$ constitute a contradictory while $tall\sim short$ do not.  In other words, if there is a continuum between the two (non-binary), then it is gradable an a paradox will not be formed. 
-
-In mathematical terms, where $G$ is the set of gradables:
-	\begin{quote}
-		$x \in G\Leftrightarrow \exists y\exists z(x<y<z)$
-
-		$x \not\in G\Leftrightarrow \not\exists y\exists z(x<y<z)$
-	\end{quote}
-
-An example would be: $small\sim big, ~big\sim huge, small\sim huge$.
+Herein we also show the classification confusion matrix for type of imitation, which is not revelatory, but informative nonetheless.  [Future work: also show the meta-data profile, including a word-length histogram, word-token-length histogram, etc.].  

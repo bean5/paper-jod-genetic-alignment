@@ -1,0 +1,33 @@
+\section {Prior Work on Imitation Alignment}
+Prior work in the realm of imitation alignment include work on the following topics:
+	\begin{itemize}
+		\item plagiarism detection software
+		\item author attribution
+	\end{itemize}
+
+We found no instances of work that aimed to classify/categorize/cluster imitations. We also found no instances of work that used machine learning to train a regressive ANN with better error rates than the underlying algorithms.
+
+\subsection{Author Attribution}
+
+\subsection{Imitation Detection}
+One might define \textit{plagiarism} as attempting (or succeeding) at passing off another's work as one's own. This includes, but is not limited to, text. Plagiarism detection in the realm of code-copying exists for various languages and has been proven to be useful. Indeed, some universities have implemented code-plagiarism detectors (citation xyz).
+
+Here we do not detect imitation, but rather align text marked as containing instances of imitation. 
+
+We make not attempt to chastise the speakers for their imitations since in order to know whether they are truly plagiarizing, we would have to verify that they did not cite the source (a supervised task). We leave the human intervention to future work. (And since our text is from the 19th century, we can hardly chastise the speaker even if they admitted to plagiarizing.)
+
+\subsubsection{Alignment (Genetic and non-Genetic)}
+Alignment has been used before to align text. Nevertheless, it is most often found as a sub-algorithm rather than a means to an end. Furthermore, it is often used for something other than imitation detection. For example, Bill Lund uses a modified A\* search to align varied levels of binarized forms of the same text to better perform OCR (citation xyz).
+
+Showing that genetic alignment is a viable approach is one of our hopes.
+
+\subsubsection{Fuzzy Metric (My Work with Dr. Hilton III)}
+Other methods of detecting possible paraphrase include fuzzy searches. Hilton III (citation 201x xyz) used one algorithm to do this. He was successful at finding instances of un-cited imitation between prophets within the Book of Mormon. 
+
+The downside to the algorithm he used is although it ranked paraphrases, it required a lot of parameters on his behalf and required that he filter the results himself. This method can be considered a supervised task at best.
+
+\subsubsection{Intrinsic Author ID}
+Interesting work that could be combined with our methods here include intrinsic author identification. This is the process of identifying which subtexts are least likely to be author by the speaker/writer. One can imigine using this as meta-data input to the BPP NN that we will describe later.
+
+\subsubsection{Error Rates of Alignments}
+Since much work aims to pair documents as related, sometimes the error rates must take into account up to 4 positions at a time: the left and right end of quoted or near quoted text in both documents (2 ends * 2 documents = 4). The metric for measuring accuracy of any algorithm that aims to do this can be hairy (wc: use other word). One method includes using the BLEU? method.  Aligning both sides well is important, especially when neither is known to be a predecessor of the other. However, when 1 piece of meta-data is known, namely the timestamp of creation, for both documents, suddenly knowing which is the imitation is trivial. Nevertheless, the interest in the alignments for both sides remains of interest, at least for comparing methods of alignment.

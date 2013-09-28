@@ -1,49 +1,71 @@
 \section {Methodology}
 %\textbf{}
 
+We know the approximate century of authorship for all materials in our database. This allows us to know that for each imitation, which text is the source and which is the perpetrator. We collectively group more ancient documents as \textit{primary} documents while those that we already know contain imitations thereof to be be \textit{secondary} documents.
+
+We do not detect imitations; we only aim to align them.  All documents are primarily English and any non-English words are a matter of stylistic choices on behalf of the speaker.  
+
 \subsection{Gold Standard}
-Our primary documents contained all verses from the following scripture:
-	\begin{description}
+\subsubsection{Primary/Imitated Documents}
+Our primary source documents contained all verses from the following scripture:
+	\begin{itemize}
 		\item \textit{King James Bible},
 		\item \textit{Joseph Smith Translation of the Bible},
 		\item \textit{The Book of Mormon} (LDS),
 		\item \textit{The Doctrine \& Covenants} (LDS), and
-		\item \textit{The Pearl of Great Price} (LDS).
-	\end{description}
+		\item \textit{The Pearl of Great Price} (LDS). 
+	\end{itemize}
 
-As for secondary documents, our documents consisted of all discourses in the \textit{Journal of Discourses}. In total, there are \JoDPagesTotal pages.
+\subsubsection{Secondary/Imitating Documents}
+As for secondary documents, our documents consisted of all discourses in the \textit{Journal of Discourses}. In total, there $\JoDPagesTotal$ pages.
 
-\subsection{Algorithm}
-We used a normal \textit{Needleman-Wunsch} genetic algorith, but with variable costs. This produces interesting results which will be described in \ref{conclusion}.
+Our standard also includes labels for type of imitation, which allows us to interpolate, in a way, using a BPP MLNN to decrease our error rates. This method has promise and could be extended to areas where both ends of the alignment can be used.
+
+\subsection{Cannonicalization and Parsing}
+Since many of our documents date back to the 19th century, we opt to ignore punctuation. We do this for all documents. Furthermore, we lower-case all text. Beyond this, there is no more cannonicalization except when stemming, which is only used in one of the algorithms we use.
+
+\subsection{Algorithms}
+We used 2 modified forms of the \textit{Needleman-Wunsch} genetic algorithm: one with stemming and the other without. In both cases, we trim trailing deletions as we assume that deletions are artifacts of the fact that speakers/discoursants don't always stop producing text after imitating a primary document. In other words, several imitations might occur within 1 page.
+%Variable cost using Lucene...
+% This produces interesting results which will be described in \ref{conclusion}. 
 
 \subsubsection{Needleman-Wunsch}
 
+\subsubsection{Stemming}
+We use the Java 7 port of Java 6 Porter Stemmer which was available at https://github.com/~bean5/Java-Porter-Stemmer as the Java 6 implementation was buggy at best in Java 7.
 
-\subsubsection{Lucene Frequencies IFTF?}
+%Future Work:
+%\subsubsection{Lucene Frequencies IFTF?}
 
 
-\subsubsection{Right + Left End}
+\subsection{Citation Meta-Data}
 
+\subsubsection{Intrinsic Meta-Data}
+From each alignment, we can derive the following meta-data:
+	\begin{itemize}
+		\item \textit{length of primary alignment, length of secondary alignment},
+		\item \textit{score of alignment},
+		\item \textit{percentage of primary document matched},
+		\item \textit{average word length within alignment},
+		\item \textit{[other here...]}
+%		\item \textit{}
+	\end{itemize}
+
+\subsubsection{Extrinsic Meta-Data}
+Other meta-data which is available include:
+	\begin{itemize}
+		\item \textit{Author/Speaker's Name}
+		\item \textit{Author/Speaker's Age}
+		\item \textit{Author/Speaker's Position within church};
+		\item \textit{Date};
+%		\item \textit{\vdots}
+	\end{itemize}
 
 
 \subsection{Metric}
-Right end only :( since gold standard only contained right end.
+Since our gold standard only contains right ends of alignments, we produce error rates based on that end of the alignment. Notwithstanding, we can leverage both the left and right ends of alignments as inputs to the BP-trained neural network!
 
 \subsubsection{Accuracy vs. Error}
-The survey consisted of 10 main questions.  Respondents were to provide their one best xyz for the each word. Half (5) of the words were adjectives while the other half were concrete nouns.  They were instructed to provide institutionalized xyz if they themselves believed them to be the best xyz possible. In the case that they could not come up with a xyz, they were instructed to leave it \textit{blank}, write \textit{none}, or write \textit{N/A} (meaning ``not applicable'') in which case their response was not included in the counts since such responses are not xyz.  Again, future work could focus on this aspect of xyz.  
-
-\subsection{Response Normalization} It was not uncommon to receive responses that differed only in terms of capitalization, plurality, or part of speech (e.g. chair, Chairs; alive, living).  These were counted to be semantically the same.  The motivation for this is that some forms of abstracts cannoth be pluralized and that xyz are ``supposed'' to be of the same part of speech.
-
-Although merging decreases the total count of xyz, this mainly impacted the number of xyz for nouns which makes the results in this survey more conservative than they might otherwise be when including the variation caused by inflected word forms.  
-%Thus word groups such as alive and living are referred to collectively as alive/living. 
 
 
-\section{Participant Selection}
-\subsubsection{Native Language}
-Only native native speakers of English are included in the results of this study. It is, nevertheless, interesting to note that the two non-native speakers of English provided \textbf{no} responses that the natives did not provide, hinting at the possibility that even non-natives are keyed into how xyz functions.  Future work must determine whether this is truly the case. (Level of comprehension of English is probably going to be a key factor.)
 
-\subsubsection{Age}
-This study includes participants between the age of 18 and 32.
-
-\subsubsection{Gender}
-This study includes both genders.  See section~\ref{results} for how they are used (statistical tests is conducted twice).  
