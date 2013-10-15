@@ -1,13 +1,25 @@
 \section {Methodology}
 %\textbf{}
 
-We know the approximate century of authorship for all materials in our database. This allows us to know that for each imitation, which text is the source and which is the perpetrator. We collectively group more ancient documents as \textit{primary} documents while those that we already know contain imitations thereof to be be \textit{secondary} documents.
+We know the approximate century of authorship for all materials in our database. This allows us to know that for each imitation, which text is the source and which is the imitator. We collectively group more ancient documents as \textit{primary documents} while those that we already know contain imitations thereof to be be \textit{secondary documents}.
 
-We do not detect imitations; we only aim to align them.  All documents are primarily English and any non-English words are a matter of stylistic choices on behalf of the speaker.  
+[xyz Introduce more of the method here before delving into descriptions.] 
+
+[xyz We compare and combine up to 8 variations of settings on genetic algorithms. ]
+
+[xyz Mention synonym matching.]
+
+[xyz Note that we do not plan to use this single variation of the algorithm alone, but to combine the outputs of several into one BP-trained ANN.]
+
+
+%Future Work:
+%Variable cost using Lucene...
+% This produces interesting results which will be described in \ref{conclusion}. 
+	%Lucene Frequencies IFDF
 
 \subsection{Gold Standard}
 \subsubsection{Primary/Imitated Documents}
-Our primary source documents contained all verses from the following scripture:
+Our primary source documents contained scriptural passages from the following scriptural canons:
 	\begin{itemize}
 		\item \textit{King James Bible},
 		\item \textit{Joseph Smith Translation of the Bible},
@@ -17,26 +29,67 @@ Our primary source documents contained all verses from the following scripture:
 	\end{itemize}
 
 \subsubsection{Secondary/Imitating Documents}
-As for secondary documents, our documents consisted of all discourses in the \textit{Journal of Discourses}. In total, there are $\JoDPagesTotal$ pages.
+As for secondary documents, our documents consisted of all discourses in the \textit{Journal of Discourses} up through volume 10. In total, there are $\JoDPagesTotal$ pages and $\JoDCitationsTotal$ citations.
 
-Our standard also includes labels for type of imitation, which allows us to interpolate, in a way, using a BPP MLNN to decrease our error rates. This method has promise and could be extended to areas where both ends of the alignment can be used.
+Our gold standard contains the right end of the alignments for class for each imitation instance. This, is used as the target for the regression BP ANN. The BP ANN achieves lower error rates for every class and subsequently a lower error rate than any genetic algorithm alone. %This method has promise and could be extended to areas where both ends of the alignment can be used.
 
-\subsection{Cannonicalization and Parsing}
+%Our standard also includes labels for class for each imitation instance, which allows us to interpolate, in a way, using a BP MLNN to decrease our error rates. This method has promise and could be extended to areas where both ends of the alignment can be used.
+
+\subsubsection{Documents, Citations, and \& Alignment Format}
+The alignments we have included the right end of alignments. These were hand-aligned by Dr. Galbraith using the online tool which Dr. Liddle produced. We plan to insert scripture citation references at these positions so readers of the Journal of Discourse can benefit from them.
+
+Our gold standard also includes the classification of type of imitation. Our types are listed below. Future work might find that fewer or more classes exist.
+
+	\begin{enumerate}
+		\item Exact Quote
+		\item Near-exact Quote
+		\item Fragment
+		\item Lazy quote
+		\item Paraphrase
+		\item Allusion
+		\item Other%(scattered allusion/influential citation)
+	\end{enumerate}
+
+Baseline errors are based on the initial right end alignments which were placed at the end of either of two columns on a page. 
+
+\subsubsection{Data Preparation: Cannonicalization and Parsing}
 Since many of our documents date back to the 19th century, we opt to ignore punctuation. We do this for all documents. Furthermore, we lower-case all text. Beyond this, there is no more cannonicalization except when stemming, which is only used in one of the algorithms we use.
 
-\subsection{Algorithms}
-We used 2 modified forms of the \textit{Needleman-Wunsch} genetic algorithm: one with stemming and the other without. In both cases, we trim trailing deletions as we assume that deletions are artifacts of the fact that speakers/discoursants don't always stop producing text after imitating a primary document. In other words, several imitations might occur within 1 page.
-%Variable cost using Lucene...
-% This produces interesting results which will be described in \ref{conclusion}. 
+\subsection{Algorithm Variations}
+We used 8 variations of the \textit{Needleman-Wunsch} genetic algorithm. Settings that are toggled included reversing the primary documents, stemming (using the Porter Stemmer), and accept synset overlap as indication of synonymy. The genetic action costs are listed below. 
+
+	\begin{itemize}
+		\item \textit{Match}: 3
+		\item \textit{Indel}: -4
+		\item \textit{Replace}: -2
+%		\item \textit{}: 
+	\end{itemize}
+
+In all cases, we trim trailing indels and replaces until we reach the outermost matches of the alignments. %We assume that deletions are artifacts of the fact that speakers/discoursants don't always stop producing text after imitating a primary document. 
+The positions of these matches serve as indicators of proposed alignment positions which are used in our metric for error. The genetic actions between these matches are used to derive meta-data such as total number of matches, total indels, total replaces, and length of match.
 
 \subsubsection{Needleman-Wunsch}
+[More on this. Cite it, link to it.]
+
+\subsubsection{Document Reverse}
+The idea behind reversing a document is to allow it to capture paraphrase or out-of-order quoting. Our method is naive and simply reverses the order of the words, but another method we could have opted to use could be reversing the order of sentences, but maintaining word order within sentences. We leave this to future work. 
 
 \subsubsection{Stemming}
-We use the Java 7 port of Java 6 Porter Stemmer which was available at https://github.com/~bean5/Java-Porter-Stemmer as the Java 6 implementation was buggy at best in Java 7.
+We use the Java 7 port of Java 6 Porter Stemmer which was available at https://github.com/~bean5/Java-Porter-Stemmer as the Java 6 implementation was buggy in Java 7.
 
-%Future Work:
-%\subsubsection{Lucene Frequencies IFTF?}
+Stemming allows words of different tenses, but related etymology to count as matches to the genetic algorithm. 
 
+
+\subsubsection{Synynomy}
+Ideally, synonymy would be as easy as submitting a query of two words and receiving a boolean back. This is not as straight-forward as it seems in our case since we are dealing with older documents. We opted for a strict synonymy rule that gave use high precision and low recall. Tuning this could easily be a topic for future research. Our formula was as follows:
+
+\vspace{5mm}
+\indent{\textit{Words are synonymous iff they share at least 3 hyopnyms and/or hypernyms.}}
+\vspace{5mm}
+
+Since we did not apply part of speech tagging, we allowed the engine to assume all words were nouns. Since it is not the case that all words are nouns, we decrease \textit{recall} by blacklisting; our blacklist consisted mostly of common English verbs, but also included strings such as ``\&c.'' (etc.). Our blacklist is as follows: has, can, had, might, would, should, will, shall, have....(xyz list all.)
+
+We used the \textbf{WordNet} engine to perform this analysis. (xyz Cite here.)
 
 \subsection{Citation Meta-Data}
 
@@ -63,9 +116,10 @@ Other meta-data which is available include:
 
 
 \subsection{Metric}
-Since our gold standard only contains right ends of alignments, we produce error rates based on that end of the alignment. Notwithstanding, we can leverage both the left and right ends of alignments as inputs to the BP-trained neural network!
+Since our gold standard only contains right ends of alignments, we produce error rates based on those. Notwithstanding, we can leverage both the left and right ends of alignments as inputs to the BP-trained neural network!
 
-\subsubsection{Accuracy vs. Error}
+Our formula for deriving error is the root mean square error:
 
+\center{RMSE=$\sqrt{\frac{1}{n}\sum_{i=1}^{n}{(e_i-\overline{e_i})^2}}$}
 
-
+%\subsubsection{Accuracy vs. Error}
