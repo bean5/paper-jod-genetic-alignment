@@ -21,7 +21,7 @@ Our primary source documents contained scriptural passages from the following sc
 	\end{itemize}
 
 \subsubsection{Secondary/Imitating Documents}
-As for secondary documents, our documents consisted of all discourses in the \textit{Journal of Discourses} up through volume 10. In total, there are $\JoDPagesTotal$ pages and over $\JoDCitationsTotal$ citations.
+As for secondary documents, our documents consisted of all discourses in the \textit{Journal of Discourses} up through volume 10. In total, there are $\JoDPagesTotal$ columns and over $\JoDCitationsTotal$ citations in our gold standard.
 
 Our gold standard contains the right end of the alignments for class for each imitation instance. This, is used as the target for the regression BP-MLP. %The BP-MLP achieves lower error rates for every class and subsequently a lower error rate than any genetic algorithm alone. %This method has promise and could be extended to areas where both ends of the alignment can be used.
 
@@ -99,7 +99,7 @@ We have 4 versions of synset matching. One is synonymous with synset matching be
 %\indent{\textit{Words are synonymous iff they share at least 3 hyopnyms and/or hypernyms.}}
 %\vspace{5mm}
 
-\textit{WordNet} (xyz Cite here.) was used to query for obtaining synsets---including hypernyms and hyponyms. The WordNet morphology boolean was set to false for all queries. 
+\textit{WordNet} \cite{wordnet_1998} was used to query for obtaining synsets---including hypernyms and hyponyms. The WordNet morphology boolean was set to false for all queries. 
 
 Since part of speech tagging and word-sense disambiguation was not performed, the query for synsets always assumed words were nouns. Since this is not the case, we decrease \textit{recall} by blacklisting certain English words---particularly modal verbs. Our blacklist also included strings such as ``\&c.'' (etc.) which appeared to easily be counted as synonyms of words when in fact they were not. Our blacklist is as follows: \textit{has, can, had, might, would, should, will, shall, have....(xyz list all.)}
 
@@ -136,11 +136,11 @@ Although we do not leverage the use of extrinsic \textbf{meta-data} in our resea
 	\end{itemize}
 
 \subsection{Tools/Parameters for ML Models}
-Weka (xyz cite) was our tool of choice for consuming and using our dataset once the ARFF files were generated. We used the following functions and settings for our ML models:
+Weka \cite{weka_2009} was our tool of choice for using our ARFF dataset to perform machine learning. We used the following functions and settings for our ML models:
 \begin{enumerate}
 	\item 10-fold cross validation for both perceptron and BP-MLP
 	\item Perceptron: Simple Linear Regression
-	\item BP-MLP: learning rate of 0.3, 0.2 momentum, and 1500 training time
+	\item BP-MLP: learning rate of 0.3, 0.2 momentum, and 2000 training time
 \end{enumerate}
 
 \subsection{Metric}
