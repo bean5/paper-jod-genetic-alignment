@@ -1,13 +1,39 @@
 %@string{jgr = "J.~Geophys.~Res."}
 
-@ARTICLE{Bertocchi,
-   AUTHOR  = {Alessandra Bertocchi},
-   YEAR    = {2003},
-   TITLE   = {Antonyms and Paradoxes},
+@proceeding{lund_binarization,
+	author = {Lund, William B. and Kennard, Douglas J. and Ringger, Eric K.},
+	title = {Combining multiple thresholding binarization values to improve OCR output},
+	journal = {Proc. SPIE},
+	volume = {8658},
+	number = {},
+	pages = {86580R-86580R-11},
+	abstract = {
+	For noisy, historical documents, a high optical character recognition (OCR) word error rate (WER) can render the OCR
+	text unusable. Since image binarization is often the method used to identify foreground pixels, a body of research seeks
+	to improve image-wide binarization directly. Instead of relying on any one imperfect binarization technique, our method
+	incorporates information from multiple simple thresholding binarizations of the same image to improve text output. Using
+	a new corpus of 19th century newspaper grayscale images for which the text transcription is known, we observe WERs of
+	13.8% and higher using current binarization techniques and a state-of-the-art OCR engine. Our novel approach combines
+	the OCR outputs from multiple thresholded images by aligning the text output and producing a lattice of word alternatives
+	from which a lattice word error rate (LWER) is calculated. Our results show a LWER of 7.6% when aligning two threshold
+	images and a LWER of 6.8% when aligning five. From the word lattice we commit to one hypothesis by applying the
+	methods of Lund et al. (2011) achieving an improvement over the original OCR output and a 8.41% WER result on this
+	data set.
+	},
+	year = {2013},
+	doi = {10.1117/12.2006228},
+	URL = { http://dx.doi.org/10.1117/12.2006228},
+	eprint = {}
+}
+
+@ARTICLE{hilton_2012,
+   AUTHOR  = {Dr. John Hilton III},
+   YEAR    = {2012},
+   TITLE   = {...},
    JOURNAL = {},
-   VOLUME  = {17},
+   VOLUME  = {1},
    NUMBER  = {1},
-   PAGES   = {113--122}
+   PAGES   = {1}
 }
 
 @ARTICLE{Nuckolls,
@@ -49,13 +75,22 @@
    url = {http://www.synonym.org/}
 }
 
+@ONLINE{lds.org,
+   AUTHOR  = {LDS.org},
+   TITLE   = {Journal of Discourses},
+   Month = oct,
+   Year = {2013},
+   NOTE = "Accessed on 2013-10-24",
+   URL = {http://www.lds.org/topics/journal-of-discourses}
+}
+
 @ONLINE{m-w,
    AUTHOR  = {Merriam-Webster, Incorporated},
    TITLE   = {Dictionary and Thesaurus – Merriam-Webster Online},
    Month = dec,
    Year = {2012},
    NOTE = "Accessed on 2012-12-12",
-   url = {http://www.merriam-webster.com/}
+   URL = {http://www.merriam-webster.com/}
 }
 
 @ONLINE{Dictionary.com,
