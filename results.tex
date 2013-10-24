@@ -1,35 +1,56 @@
 \section {Results}
 \label{results}
-%\textbf{}
 
 \subsection {Analysis} 
 %Since $H_{1}$ concerns the mean count of xyz for each word, a one-tailed Student's Independent \textit{t}-test will be used here to determine whether the mean count of xyz for nouns are statistically significantly greater than those for adjectivs.  The threshold for significance adopted here is $0.01$.  
 
-
-\subsection{Overall Error}
-Table xyz %~\ref{algorithmsTotalError} 
-shows the overall error for each algorithm.
-%\includegraphics[width=9cm]{.png}
-
-Overall, the best algorithm was \#xyz while the worst was \#xyz. 
-
-\subsection{Error By Imitation Class}
-Tables xyz-xyz %~\ref{alg1totalerror}-~\ref{alg8totalerror} 
-show the error for each algorithm, for each imitation type.
-%\includegraphics[width=9cm]{.png}
-
-\subsection{Best in Each Category}
-Table xyz %~\ref{theoreticalCombinedError} 
-shows the lowest error achieved for each imitation type. 
-%\includegraphics[width=9cm]{.png}
+\subsection{Genetic Algorithm Number}%for appendix
+We used a 3-level for-loop structure to vary the parameters of the genetic alignment algorithm to produce differing alignment algorithms---each one having its own preferences. 
 
 \subsubsection{Settings}
-Chart xyz %~\ref{best settings}
-shows the settings used to achieve the lowest error for each imitation type.
-%\includegraphics[width=9cm]{.png}
+Our 3-level for-loop having 2 settings for word order (forward/reverse) and 4 settings for synset strictness (off/1/2/3), subsequently, results in 8 algorithms. Figures xyz %~\ref{best settings}
+shows the settings used for each of them.%to achieve the lowest error for each imitation type.
+
+
+\begin{tabular} {|l | c | c |}
+	\hline	\textbf{Algorithm Number} & \textbf{Word Order} & \textbf{Synset strictness}\\
+	\hline	1	&	2	&	3	\\
+	\hline	2	&	2	&	3	\\
+	\hline	3	&	2	&	3	\\
+	\hline	4	&	2	&	3	\\
+	\hline	5	&	2	&	3	\\
+	\hline	6	&	2	&	3	\\
+	\hline	7	&	2	&	3	\\
+	\hline	8	&	2	&	3	\\ \hline
+\end{tabular}
+
+\subsection{Overall Error}
+Figure xyz %~\ref{algorithmsTotalError} 
+shows the overall error for version of the genetic algorithm. The best overall was algorithm 1 with an RMSE of $184.89$ while the worst had an RMSE of $xyz$.
+\includegraphics[width=16cm]{images/chart1.png}
+
+\subsection{Error By Imitation Class}
+Figures xyz-xyz %~\ref{alg1totalerror}-~\ref{alg8totalerror} 
+demonstrate that the various versions of genetic alignment behave differently. Their differing preferences causes them to sometimes be more adept for certain citation classes. The best genetic algorithm for each class is given below:
+
+
+\includegraphics[width=16cm]{images/chart2.png}
+\includegraphics[width=16cm]{images/chart3.png}
+\includegraphics[width=16cm]{images/chart4.png}
+\includegraphics[width=16cm]{images/chart5.png}
+\includegraphics[width=16cm]{images/chart6.png}
+\includegraphics[width=16cm]{images/chart7.png}
+\includegraphics[width=16cm]{images/chart8.png}
+
+%\subsection{Best in Each Category}
+%Figures xyz %~\ref{theoreticalCombinedError} 
+%shows the lowest error achieved for each imitation type. 
+\includegraphics[width=16cm]{images/chart9.png}
+\includegraphics[width=12cm]{images/chart10.png}
+
 
 \subsection{BP-trained ANN Performance}
-[xyz fill this in]
+(xyz fill this in)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %sample helps from previous research
