@@ -3,7 +3,7 @@ Documents were prepared by being parsed and stored. While scripture passages are
 
 The reason that scripture passages are considered to be primary documents is simple: they pre-date the secondary documents, sometimes by centuries. Thus all old documents (scriptural cannon in this case) are collectively grouped as \textit{primary documents} while those that are known to possibly contain imitations of the primary documents are collected as \textit{secondary documents}.
 
-The data is canonicalized, then we run various versions of genetic algorithms over the pairings of imitated and imitator to produce initial alignments. We compute the RMSE error thereof and compare them. The versions differ from each another in at least 1 aspect: word order (forward/reverse), and synonymy strictness levels (off/1/2/3/4/5)
+The data is canonicalized, then we run various versions of genetic algorithms over the pairings of imitated and imitator to produce initial alignments. We compute the RMSE error thereof and compare them. The versions differ from each another in at least 1 aspect: word order (forward/reverse), and synonymy strictness levels (off/1/2/3)
 
 Second, we feed the output of these algorithms, along with metadata such as \# of matches, \# of indels, etc., into machine learning models: (1) simple regression perceptron, and (2) the regressive version of the back-propagation-trained multi-layer perceptron (BP-MLP). We compare these to determine whether machine learning was beneficial to the alignments. We will refer to (1) as `simple perceptron' and (2) as BP-MLP.
 
@@ -15,7 +15,7 @@ Our primary source documents contained scriptural passages from the following sc
 	\begin{itemize}
 		\item \textit{King James Bible},
 		\item \textit{Joseph Smith Translation of the Bible},
-		\item \textit{The Book of Mormon} (LDS),
+		\item \textit{The Book of Mormon} (LDS\footnote{Acronym for ``The Church of Jesus Christ of Latter-day Saints''. The LDS are sometimes referred to as ``Mormons''.}),
 		\item \textit{The Doctrine \& Covenants} (LDS), and
 		\item \textit{The Pearl of Great Price} (LDS). 
 	\end{itemize}
@@ -30,17 +30,25 @@ Our gold standard contains the right end of the alignments for class for each im
 \subsubsection{Documents, Citations, and \& Alignment Format}
 The alignments we have include the right end of alignments\footnote{We plan to insert scripture citation references at these positions so readers of the Journal of Discourse can benefit from them.. These were hand-aligned by Dr. Galbraith using the online tool which Dr. Liddle produced}.
 
-Our gold standard also includes the classification of type of imitation. Our types are listed below. Future work might find that fewer or more classes exist.
+Our gold standard also includes the classification of type of imitation. Our types are listed in table \ref{tab:imitation-types}. Future work might find that fewer or more classes exist.
 
-	\begin{description}
-		\item [Type 1] Exact Quote
-		\item [Type 2] Near-exact Quote
-		\item [Type 3] Fragment
-		\item [Type 4] Lazy quote
-		\item [Type 5] Paraphrase
-		\item [Type 6] Allusion
-		\item [Type 7] Other%(scattered allusion/influential citation)
-	\end{description}
+\begin{table}[center]
+	\begin{center}
+		\begin{tabular}{|c|l|} \hline
+			\textbf{Imitation Type}	& \textbf{Description}		\\ \hline \hline
+			1						& Exact Quote				\\ \hline
+			2						& Near-exact Quote			\\ \hline
+			3						& Fragment					\\ \hline
+			4						& Lazy quote				\\ \hline
+			5						& Paraphrase				\\ \hline
+			6						& Allusion					\\ \hline
+			7						& Other						\\ \hline
+		\end{tabular}
+	\end{center}
+	
+	\caption{Imitation Types}
+	\label{tab:imitation-types}
+\end{table}
 
 %Proving the validity or merit of such classifications is left to future work. 
 

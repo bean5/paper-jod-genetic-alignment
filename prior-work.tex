@@ -14,15 +14,15 @@ We found no instances of work that aimed to use regresssion via machine learning
 \subsection{Imitation Detection}
 One might define \textit{plagiarism} as attempting (or succeeding) at passing off another's work as one's own. This includes, but is not limited to, text. Plagiarism detection has been applied with some success in the area detecting whether computer program code was copied. Indeed, some universities have implemented code-plagiarism detectors (citation xyz).
 
-Here we do not detect imitations, but rather align text marked as containing instances of imitation \footnote{Furthermore, we make no attempt to chastise the authors of the imitations since in order to know whether they were truly plagiarizing, we would have to verify that they did not cite the source (a supervised task). We leave the human intervention to future work. (And since our text is from the 19th/20th century, we could not chastise the speaker even if we wanted to.)}.
+Here we do not detect imitations, but rather align text marked as containing instances of imitation \footnote{Furthermore, we make no attempt to chastise the authors of the imitations since in order to know whether they were truly plagiarizing, we would have to verify that they did not cite the source (a supervised task). We leave the human intervention to future work. (And since our text is from the 19th century, we could not chastise the speaker even if we wanted to do so.)}.
 
 \subsubsection{Alignment (Genetic and non-Genetic)}
-Alignment has been used before to align text. Nevertheless, it is most often found as a sub-algorithm rather than a means to an end. Furthermore, it is often used for something other than imitation detection. For example, Bill Lund uses a modified A* search to align varied levels of binarized forms of the same text to better perform OCR (citation xyz).
+Methods besides genetic alignment have been used before to align text. They are most often found as a sub-algorithm rather than a means to an end. Furthermore, it is often used for something other than imitation alignment. For example, Bill Lund in \cite{lund_binarization} uses a modified A* search to align varied levels of binarized forms of the same text to better perform OCR.
 
 Showing that genetic alignment is a viable approach is one of our hopes.
 
-\subsubsection{Fuzzy Metric (My Work with Dr. Hilton III)}
-Other methods of detecting possible paraphrase include fuzzy searches. Hilton III (citation 201x xyz) used one algorithm to do this. He was successful at finding instances of un-cited imitation between prophets within \textit{The Book of Mormon}.
+\subsubsection{Fuzzy Metric}
+Other methods of detecting possible paraphrase include fuzzy searches. Hilton III, \cite{hilton_2012}, used one algorithm to do this. He was successful at finding instances of un-cited imitation between prophets within \textit{The Book of Mormon}.
 
 The downside to the algorithm he used is that it was a highly supervised algorithm. It required a lot of parameters to be tested, tweaked, and set. Furthermore, the output often required that Hilton filter the results himself. This is a supervised method at best. Nevertheless, the algorithm did rank results, making it easy for Hilton to simply stop investigating input upon reaching any false positives.
 
