@@ -1,11 +1,11 @@
-\section {Results}
+%\section {Results}
 \label{results}
 
-\subsection {Analysis} 
+%\subsection {Analysis} 
 %Since $H_{1}$ concerns the mean count of xyz for each word, a one-tailed Student's Independent \textit{t}-test will be used here to determine whether the mean count of xyz for nouns are statistically significantly greater than those for adjectivs.  The threshold for significance adopted here is $0.01$.  
 
-\subsection{Total RMSE (Error Over All Imitation Types)}
-Figure \ref{fig:overall} shows the overall error for each variation of the genetic algorithm. Overall, the best algorithm was algorithm 1 with an RMSE of $184.89$ while the worst, algorithm 8, had an RMSE of $188.82$. Since the genetic alignment algorithms are all deterministic in nature, these errors are always the same. Subsequently, their standard deviation is 0 and their average is what they are. This makes them statistically significantly different. Thus, with $p < 0.00...01$, algorithm 1 is better than all other algorithms thus far demonstrated.
+%\subsection{Total RMSE (Error Over All Imitation Types)}
+Figure \ref{fig:overall} shows the overall error for each variation of the genetic algorithm. The best algorithm was algorithm 1 with an RMSE of $184.89$ while the worst, algorithm 8, had an RMSE of $188.82$. %Since the genetic alignment algorithms are all deterministic in nature, these errors are always the same. Subsequently, their standard deviation is 0 and their average is what they are. This makes them statistically significantly different. Thus, with $p < 0.00...01$, algorithm 1 is better than all other algorithms thus far demonstrated.
 
 \begin{figure}[center]
 	\centering
@@ -14,8 +14,8 @@ Figure \ref{fig:overall} shows the overall error for each variation of the genet
 	\label{fig:overall}
 \end{figure}
 
-\subsection{Error By Imitation Class}
-Figures \ref{fig:c1}-\ref{fig:c7} demonstrate that the various versions of genetic alignment behave differently. This is expected behavior: Their preferences cause them to be more adept for certain imitation classes. The best genetic algorithm for each class is given in table \ref{tab:best-for-each}.
+%\subsection{Error By Imitation Class}
+To demonstrate the preferences inherent in each genetic alignment algorithm, we compute the RMSE for each with respect to each citation type. They each exhibited behaviors that were interesting. For example, genetic alignment 2 was best for imitations of type 2. The best genetic algorithm for each class is given in table \ref{tab:best-for-each}.
 
 \begin{table}[center]
 	\centering
@@ -36,90 +36,3 @@ Figures \ref{fig:c1}-\ref{fig:c7} demonstrate that the various versions of genet
 \end{table}
 
 Interestingly, algorithm 1 is often the best algorithm. Subsequently, this is also true for the RMSE over all imitation types. Algorithm 1 combined wih BP-MLP ends up being the best high-order combinational model. However, in when simple linear regression is used, algorithm 1 ends up being the worst model.
-
-\begin{figure}[center]
-	\centering
-	\includegraphics[width=16cm]{images/chart1.png}
-	\caption{}
-	\label{fig:c1}
-\end{figure}
-\begin{figure}[center]
-	\centering
-	\includegraphics[width=16cm]{images/chart8.png}
-	\caption{}
-	\label{fig:c2}
-\end{figure}
-\begin{figure}[center]
-	\centering
-	\includegraphics[width=16cm]{images/chart3.png}
-	\caption{}
-	\label{fig:c3}
-\end{figure}
-\begin{figure}[center]
-	\centering
-	\includegraphics[width=16cm]{images/chart2.png}
-	\caption{}
-	\label{fig:c4}
-\end{figure}
-\begin{figure}[center]
-	\centering
-	\includegraphics[width=16cm]{images/chart7.png}
-	\caption{}
-	\label{fig:c5}
-\end{figure}
-\begin{figure}[center]
-	\centering
-	\includegraphics[width=16cm]{images/chart6.png}
-	\caption{}
-	\label{fig:c6}
-\end{figure}
-\begin{figure}[center]
-	\centering
-	\includegraphics[width=16cm]{images/chart5.png}
-	\caption{}
-	\label{fig:c7}
-\end{figure}
-
-%\subsection{Best in Each Category}
-%Figures xyz %~\ref{theoreticalCombinedError} 
-%shows the lowest error achieved for each imitation type.
-
-\clearpage
-
-\subsection{BP-trained MLP Performance}
-(xyz fill this in)
-
-\begin{figure}[center]
-	\centering
-	\includegraphics[width=16cm]{images/chart4.png}
-	\caption{Regression provided by machine learning trumps the errors for genetic alignment. Furthermore, higher-ordered BP-MLP models provide the lowest errors.}
-	\label{fig:overall_ml}
-\end{figure}
-
-It is 
-\begin{figure}[center]
-	\centering
-	\includegraphics[width=12cm]{images/chart10.png}
-	\caption{An interesting correlation that lows in perceptron are highs in BP-MLP.}
-	\label{fig:perceptron_vs_bp}
-\end{figure}
-\clearpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%sample helps from previous research
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\input{results-all-responses}
-
-
-%The Welch's \textit{t}-test agrees that there is significance (equal variance not assumed):%
-%	\begin{quote}
-%		$t(5)=4.1642, p < 0.00439413$
-%	\end{quote}
-
-%\subsection{}
-%Since there were few responses from men (only 9), it seems that running the same \textit{t}-test on the responses without the male responses could be of interest as well.  Tables~\ref{tab:female_adjective}, \ref{tab:female_noun} show the normalized responses and total counts for each set of xyz while Table~\ref{tab:female_group_stats} shows the group statistics for the two groups.
-
-
-%The calculated statistic is as follows (equal variance not assumed):
-%$t(7.881)=3.55902, p < 0.00461577$ 

@@ -1,36 +1,15 @@
-\section {Methodology}
-Documents were prepared by being parsed and stored. While scripture passages are in themselves considered the largest unit of text in primary documents, the largest considered unit of text in our secondary documents is a column of a page (up to half the page). Optimal alignments, as demonstrated by gold alignments, are contained somewhere within a column while baseline alignments are placed at the end of the column.
+%\section {Methodology}
+While scripture passages are in themselves considered the largest unit of text in primary documents, the largest unit of text considered in our secondary documents is a column of a page. Optimal alignments, as demonstrated by gold alignments, are contained somewhere within a column while baseline alignments are placed at the end of the column.
 
-The reason that scripture passages are considered to be primary documents is simple: they pre-date the secondary documents, sometimes by centuries. Thus all old documents (scriptural cannon in this case) are collectively grouped as \textit{primary documents} while those that are known to possibly contain imitations of the primary documents are collected as \textit{secondary documents}.
+The data is canonicalized, then we run various versions of genetic algorithms over the pairings of imitated and imitator to produce initial alignments. Algorithms are compared by comparing their root mean square error (RMSE). The underlying difference between each model is that each differs from another in at least 1 parameter: word order (forward/reverse), and synonymy strictness level (off/1/2/3).
 
-The data is canonicalized, then we run various versions of genetic algorithms over the pairings of imitated and imitator to produce initial alignments. Algorithms are compared by computing their root mean square error (RMSE). The underlying difference between each model is that each differs from another in at least 1 parameter: word order (forward/reverse), and synonymy strictness level (off/1/2/3).
-
-Second, we feed the output of these algorithms, along with metadata such as \# of matches, \# of indels, etc., into machine learning models: (1) simple regression perceptron, and (2) the regressive version of the back-propagation-trained multi-layer perceptron (BP-MLP). We compare these to determine whether machine learning was beneficial to the alignments. We will refer to (1) as `perceptron' and (2) as BP-MLP.
+Second, we feed the output of these algorithms, along with metadata such as number of matches, number of indels, etc., into machine learning models: (1) simple regression perceptron, and (2) the regressive version of the back-propagation-trained multi-layer perceptron (BP-MLP). We compare these to determine whether machine learning was beneficial to the alignments. We will refer to (1) as `perceptron' and (2) as BP-MLP.
 
 Third, we use half of the genetic algorithms to produce input into another BP-MLP. This model ends up producing an even better RMSE than any of the genetic alignments used alone as input into a machine learning model.
 
-\subsection{Gold Standard}
-\subsubsection{Primary/Imitated Documents}
-Our primary source documents contained scriptural passages from the following scriptural canons:
-	\begin{itemize}
-		\item \textit{King James Bible},
-		\item \textit{Joseph Smith Translation of the Bible},
-		\item \textit{The Book of Mormon} (LDS\footnote{Acronym for ``The Church of Jesus Christ of Latter-day Saints''. The LDS are sometimes referred to as ``Mormons''.}),
-		\item \textit{The Doctrine \& Covenants} (LDS), and
-		\item \textit{The Pearl of Great Price} (LDS). 
-	\end{itemize}
 
-\subsubsection{Secondary/Imitating Documents}
-As for secondary documents, our documents consisted of all discourses in the \textit{Journal of Discourses} up through volume 10. In total, there are $\JoDPagesTotal$ columns and over $\JoDCitationsTotal$ citations in our gold standard.
-
-Our gold standard contains the right end of the alignments for class for each imitation instance. This, is used as the target for the regression BP-MLP. %The BP-MLP achieves lower error rates for every class and subsequently a lower error rate than any genetic algorithm alone. %This method has promise and could be extended to areas where both ends of the alignment can be used.
-
-%Our standard also includes labels for class for each imitation instance, which allows us to interpolate, in a way, using a BP MLNN to decrease our error rates. This method has promise and could be extended to areas where both ends of the alignment can be used.
-
-\subsubsection{Documents, Citations, and \& Alignment Format}
-The alignments we have include the right end of alignments\footnote{We plan to insert scripture citation references at these positions so readers of the Journal of Discourse can benefit from them.. These were hand-aligned by Dr. Galbraith using the online tool which Dr. Liddle produced}.
-
-Our gold standard also includes the classification of type of imitation. Our types are listed in table \ref{tab:imitation-types}. Future work might find that fewer or more classes exist.
+%\subsubsection{Data Preparation: Cannonicalization}
+We opt to ignore punctuation. We do this for both primary and secondary documents. Furthermore, we lower-case all text. Beyond this, there is no more cannonicalization nor stop-wording. Words are parsed based on whitespace and punctuation, including \textit{'s}; so graphemes such as \textit{word's} are parsed as two words: \textit{word}, \textit{s}. %Future work: except when stemming, which is only used in one of the algorithms we use.
 
 \begin{table}[center]
 	\begin{center}
@@ -50,101 +29,56 @@ Our gold standard also includes the classification of type of imitation. Our typ
 	\label{tab:imitation-types}
 \end{table}
 
-%Proving the validity or merit of such classifications is left to future work. 
-
-Baseline errors are computed using the distance from the last word in a column to the gold standard end position for each imitation.
-
-\subsubsection{Data Preparation: Cannonicalization}
-Since many of our documents are dated before the 19th century, punctuation is often inconsistent; we therefore opt to ignore it. We do this for all documents. Furthermore, we lower-case all text. Beyond this, there is no more cannonicalization nor stop-wording. Words are parsed based on whitespace and punctuation, including \textit{'s}; so graphemes such as \textit{word's} are parsed as two words: \textit{word}, \textit{s}. %Future work: except when stemming, which is only used in one of the algorithms we use.
-
-\subsection{Algorithm Variations}
-We used 8 variations of the \textit{Needleman-Wunsch} genetic algorithm. Settings are adjusted one at a time, producing 8 total genetic alignment algorithms. The set of adjustable settings included: reversing the primary documents, %stemming (using the Porter Stemmer), and 
-and varying the requirements for acceptable synset overlap. Genetic action costs were held fixed between all runs of genetic alignment and were as follows:
+%\subsection{Algorithm Variations}
+We vary underlying parameters of the \textit{Needleman-Wunsch} genetic algorithm in order to produce models with different biases. Settings are adjusted one at a time. In total, we produce 8 total genetic alignment algorithms. The set of adjustable settings include: reversing the primary documents, %stemming (using the Porter Stemmer), and 
+and varying the requirements for acceptable synset overlap. Genetic action costs are held fixed between all runs of genetic alignment and are as follows:
 
 	\begin{itemize}
 		\item \textit{Match}: 3
 		\item \textit{Indel}: -4
 		\item \textit{Replace}: -2
-%		\item \textit{}: 
 	\end{itemize}
 
 In all cases, trailing indels and replaces are trimmed from alignments until the outermost matches of the alignments are reached. %We assume that deletions are artifacts of the fact that speakers/discoursants don't always stop producing text after imitating a primary document. 
-The idea (or assumption\footnote{No research seems free of \textit{assumptions}.}) behind this is that the last match is more likely to be an end alignment position than a replace or indel\footnote{Researching this further is certainly a viable topic for future work.}.
-The positions of these matches serve as indicators of proposed alignment positions. These are what we use we computing error metrics. The genetic actions between these matches are used to derive meta-data such as total number of matches, total indels, total replaces, and length of match.
+The idea (or assumption)%\footnote{No research seems free of \textit{assumptions}.})
+ behind this is that the last match is more likely to be an end alignment position than a replace or indel\footnote{Researching this further is certainly a viable topic for future work.}.
+The positions of these matches serve as indicators of proposed alignment positions. These are what we use to compute RMSE. The genetic actions between these matches are used to derive meta-data such as total number of matches, total number of indels, total number of replaces, and length of match.
 
 %\subsubsection{Needleman-Wunsch}
 %[More on this. Cite it, link to it.]
 
-\subsubsection{Document Reverse}
-The idea behind reversing a document is to allow it to capture paraphrase or out-of-order quoting. Our method is naive and simply reverses the order of the words, but another viable method might be to reverse the order of sentences while maintaining word order within them. We leave this to future work. For type 2 imitations this ends up making a positive difference in error rates.
+%\subsubsection{Document Reverse}
+%The idea behind reversing a document is to allow it to capture paraphrase or out-of-order quoting. Our method is naive and simply reverses the order of the words, but another viable method might be to reverse the order of sentences while maintaining word order within them. We leave this to future work. For type 2 imitations this ends up making a positive difference in error rates.
 
 %\subsubsection{Stemming}
 %We use the Java 7 port of Java 6 Porter Stemmer which was available at https://github.com/~bean5/Java-Porter-Stemmer as the Java 6 implementation was buggy in Java 7.
 
 %Stemming allows words of different tenses, but related etymology to count as matches to the genetic algorithm. 
 
-\subsubsection{Synynomy}
-Ideally, synonymy would be as easy as submitting a tuple of words as a query to a thesaurus simply to receive a boolean back. However, this cannot be done with ease, especially when dealing with documents that are older or have wide date mismatches because language often changes over time (synonyms are not exempt). The problem is exascerbated by the fact that without parts of speech or word-sense disambiguation, the correct synset is difficult to locate without using morphological cues. Intuition seems to indicate that such methods would be helpful, but we opted to ignore them and go for various methods of synonymy matching. Since we do not aim to obtain the best single variation of a genetic algorithm, we can simply have various versions of synset matching and allow higher-order machine learning (ML) models learn to ignore that which is not helpful! A further intuition is that upon imitating, an orator might be influenced by an original document in such a way that he/she uses a synonym, hypernym, or hyponym rather than a word itself. The intuition/assumpt here is that by varying strictness of synonymy, each model might end up being better for particular imitation types.
+%\subsubsection{Synynomy}
+Ideally, synonymy would be as easy as submitting a tuple of words as a query to a thesaurus simply to receive a boolean back. However, this cannot be done with ease, especially when dealing with documents that are older or have wide date mismatches because language often changes over time (synonyms are not exempt). The problem is exascerbated by the fact that without parts of speech or word-sense disambiguation, the correct synset is difficult to locate without using morphological cues. %Intuition seems to indicate that such methods would be helpful, but we opted to ignore them and go for various methods of synonymy matching. Since we do not aim to obtain the best single variation of a genetic algorithm, we can simply have various versions of synset matching and allow higher-order machine learning (ML) models learn to ignore that which is not helpful! 
+Another intuition is that upon imitating, an orator might be influenced by an original document in such a way that he/she uses a synonym, hypernym, or hyponym rather than a word itself. The assumption here is that by varying strictness of synonymy, each model might end up being better for particular imitation types.
 
 We have 4 versions of synset matching. One is synonymous with synset matching being turned off. Another was built to be very strict, providing low recall at the expense of precision. The remaining 2 simply aimed to be significantly different from being off or strict, providing varying levels of precision and recall. (Optimizing the set of synset matching methods is a topic for future research.) Our levels are as follows:
 
-\begin{description}
-	\item [Level 0]: Word strings must match perfectly to be considered synonyms (i.e. synonymy is turned off)
-	\item [Level 1]: xyz
-	\item [Level 2]: xyz
-	\item [Level 3]: xyz
-\end{description}
+\textit{WordNet} \cite{wordnet_1998} is used to query for synsets---including hypernyms and hyponyms. The WordNet morphology boolean was set to false for all queries. 
 
-%\vspace{5mm}
-%\indent{\textit{Words are synonymous iff they share at least 3 hyopnyms and/or hypernyms.}}
-%\vspace{5mm}
+Since part of speech tagging and word-sense disambiguation was not performed, the query for synsets always assumed words were nouns. Since this is not the case, we decrease \textit{recall} by blacklisting certain English words---particularly modal verbs. %Our blacklist also included strings such as ``\&c.'' (etc.) which appeared to easily be counted as synonyms of words when in fact they were not. Our blacklist is as follows: \textit{has, can, had, might, would, should, will, shall, have....(xyz list all.)}
 
-\textit{WordNet} \cite{wordnet_1998} was used to query for obtaining synsets---including hypernyms and hyponyms. The WordNet morphology boolean was set to false for all queries. 
+%\subsection{Imitation Data and Meta-data}
+Intrinsic data and meta-data of the documents and alignments are used in the machine learning models. From each alignment, we can derive the following \textbf{data}: start/end position of alignment in primary/secondary documents, alignment score, alignment length, length of document, etc.
 
-Since part of speech tagging and word-sense disambiguation was not performed, the query for synsets always assumed words were nouns. Since this is not the case, we decrease \textit{recall} by blacklisting certain English words---particularly modal verbs. Our blacklist also included strings such as ``\&c.'' (etc.) which appeared to easily be counted as synonyms of words when in fact they were not. Our blacklist is as follows: \textit{has, can, had, might, would, should, will, shall, have....(xyz list all.)}
-
-
-\subsection{Imitation Data and Meta-data}
-
-\subsubsection{Intrinsic Meta-Data}
-From each alignment, we can derive the following \textbf{data}:
-	\begin{itemize}
-		\item \textit{start/end position of alignment in primary/secondary documents},
-		\item \textit{alignment score}
-	\end{itemize}
-
-From each alignment, we can derive the following \textbf{meta-data}:
-	\begin{itemize}
-		\item \textit{length of primary alignment, length of secondary alignment},
-		\item \textit{number of matches/replaces/indels in alignment},
-		\item \textit{length of aligment},
-		\item \textit{percentage of primary document matched}, and
-		\item \textit{average word length within alignment}
-	\end{itemize}
-
-Some of these are redundant in higher order models. For example, given the number of matches, replaces, and indels, the score can be computed. A BP-MLP shouldn't have a problem with a low-order computation like that. In our work, we opt to use the number of matches, number of indels, and the overall score (not replaces) since we found our data for replaces to be corrupt. Admittedly, this could cause a bit of a problem in the simple perceptron, but the BP-MLP should be able to handle it when given sufficient hidden nodes and layers.
-
-\subsubsection{Extrinsic Meta-Data}
-Although we do not leverage the use of extrinsic \textbf{meta-data} in our research here, we believe it is important to note that it exists. Intuition says that such meta-data would be \textit{very} helpful in optimizing our results in future work. Extrinsic meta-data which we had available included:
-	\begin{itemize}
-		\item \textit{Speaker's Name}
-		\item \textit{Speaker's Age}
-		\item \textit{Speaker's Church Position/Assignment}
-		\item \textit{Volume \#}
-		\item \textit{Discourse \#}
-		\item \textit{Date}
-	\end{itemize}
-
-\subsection{Tools/Parameters for ML Models}
-Weka \cite{weka_2009} was our tool of choice for using our ARFF dataset to perform machine learning. We used the following functions and settings for our ML models:
+%\subsection{Tools/Parameters for ML Models}
+Weka \cite{weka_2009} is our tool of choice for performing machine learning on ARFF dataset. We use the following functions and settings for our ML models:
 \begin{enumerate}
 	\item 10-fold cross validation for both perceptron and BP-MLP
-	\item Perceptron: Simple Linear Regression
+	\item Simple Linear Regression/Perceptron
 	\item BP-MLP: learning rate of 0.3, 0.2 momentum, and 2000 training time
+	\item Root mean square error (RMSE) is used as our error metric.
 \end{enumerate}
 
-\subsection{Metric}
-Since our gold standard only contains right ends of alignments, we produce error rates based on those. This does not mean, however, that we do not use the left ends of alignments. Indeed, we could use them as inputs to the BP-MLP as it is a form of meta-data which might be helpful.
+%\subsection{Metric}
+Since our gold standard only contains right ends of alignments, we produce error rates based on those. %This does not mean, however, that we do not use the left ends of alignments. Indeed, we could use them as inputs to the BP-MLP as it is a form of meta-data which might be helpful.
 
 Our formula for deriving error is the root mean square error (RMSE):
 
@@ -152,19 +86,12 @@ Our formula for deriving error is the root mean square error (RMSE):
 	RMSE=$\sqrt{\frac{1}{n}\sum_{i=1}^{n}{(e_i-\overline{e_i})^2}}$
 \end{center}
 
-The RMSE values for machine learning models used here are the errors derived from 10-fold cross-validation.
-
-%\subsubsection{Accuracy vs. Error}
-
-\subsection{Genetic Algorithm Number}%for appendix
-We used a 3-level for-loop structure to vary the parameters of the genetic alignment algorithm to produce differing alignment algorithms---each one having its own preferences. 
-
-\subsubsection{Settings}
-Our 3-level for-loop having 2 settings for word order (forward/reverse) and 4 settings for synset strictness (off/1/2/3) results in 8 different algorithms. Table ~\ref{tab:settings} shows the settings used for each of them.%to achieve the lowest error for each imitation type.
+%\subsubsection{Settings}
+Our 3-level for-loop toggles between 2 settings for word order (forward/reverse) and 4 settings for synset strictness (off/1/2/3). This results in 8 different algorithms. Table ~\ref{tab:settings} shows the settings used for each of them.
 
 \begin{table}[center]
 	\centering
-	\begin{tabular} {|l | c | c |}
+	\begin{tabular} {| c | c | c |}
 		\hline	\textbf{Algorithm Number} & \textbf{Word Order} & \textbf{Synset strictness}\\
 		\hline	1	&	forward		&	off	\\
 		\hline	2	&	backward	&	off	\\
