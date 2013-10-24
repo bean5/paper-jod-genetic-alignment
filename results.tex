@@ -4,53 +4,101 @@
 \subsection {Analysis} 
 %Since $H_{1}$ concerns the mean count of xyz for each word, a one-tailed Student's Independent \textit{t}-test will be used here to determine whether the mean count of xyz for nouns are statistically significantly greater than those for adjectivs.  The threshold for significance adopted here is $0.01$.  
 
-\subsection{Genetic Algorithm Number}%for appendix
-We used a 3-level for-loop structure to vary the parameters of the genetic alignment algorithm to produce differing alignment algorithms---each one having its own preferences. 
+\subsection{Total RMSE (Error Over All Imitation Types)}
+Figure \ref{fig:overall} shows the overall error for each variation of the genetic algorithm. Overall, the best algorithm was algorithm 1 with an RMSE of $184.89$ while the worst, algorithm 8, had an RMSE of $188.82$. Since the genetic alignment algorithms are all deterministic in nature, these errors are always the same. Subsequently, their standard deviation is 0 and their average is what they are. This makes them statistically significantly different. Thus, with $p < 0.00...01$, algorithm 1 is better than all other algorithms thus far demonstrated.
 
-\subsubsection{Settings}
-Our 3-level for-loop having 2 settings for word order (forward/reverse) and 4 settings for synset strictness (off/1/2/3), subsequently, results in 8 algorithms. Figures xyz %~\ref{best settings}
-shows the settings used for each of them.%to achieve the lowest error for each imitation type.
-
-
-\begin{tabular} {|l | c | c |}
-	\hline	\textbf{Algorithm Number} & \textbf{Word Order} & \textbf{Synset strictness}\\
-	\hline	1	&	2	&	3	\\
-	\hline	2	&	2	&	3	\\
-	\hline	3	&	2	&	3	\\
-	\hline	4	&	2	&	3	\\
-	\hline	5	&	2	&	3	\\
-	\hline	6	&	2	&	3	\\
-	\hline	7	&	2	&	3	\\
-	\hline	8	&	2	&	3	\\ \hline
-\end{tabular}
-
-\subsection{Overall Error}
-Figure xyz %~\ref{algorithmsTotalError} 
-shows the overall error for version of the genetic algorithm. The best overall was algorithm 1 with an RMSE of $184.89$ while the worst had an RMSE of $xyz$.
-\includegraphics[width=16cm]{images/chart1.png}
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=16cm]{images/chart9.png}
+	\caption{Note that genetic alignment outperformed baseline in all cases.}
+	\label{fig:overall}
+\end{figure}
 
 \subsection{Error By Imitation Class}
-Figures xyz-xyz %~\ref{alg1totalerror}-~\ref{alg8totalerror} 
-demonstrate that the various versions of genetic alignment behave differently. Their differing preferences causes them to sometimes be more adept for certain citation classes. The best genetic algorithm for each class is given below:
+Figures \ref{fig:c1}-\ref{fig:c7} demonstrate that the various versions of genetic alignment behave differently. This is expected behavior: Their preferences cause them to be more adept for certain imitation classes. The best genetic algorithm for each class is given in table \ref{tab:best-for-each}.
 
+\begin{table}[center]
+	\centering
+	\begin{center}
+		\begin{tabular}{|l|c|c|} \hline
+			\textbf{Imitation Type}	& \textbf{Best Algorithm}	&	\textbf{Error (RMSE)}	\\ \hline \hline
+			1						& 1							&	147.08					\\ \hline
+			2						& 2							&	272.56					\\ \hline
+			3						& 1							&	161.01					\\ \hline
+			4						& 1							&	271.10					\\ \hline
+			5						& 1							&	183.64					\\ \hline
+			6						& 1							&	182.76					\\ \hline
+			7						& 1							&	73.94					\\ \hline
+		\end{tabular}
+	\end{center}
+	\caption{Algorithm 1 has the best RMSE for $6/7$ of the imitation types.}
+	\label{tab:best-for-each}
+\end{table}
 
-\includegraphics[width=16cm]{images/chart2.png}
-\includegraphics[width=16cm]{images/chart3.png}
-\includegraphics[width=16cm]{images/chart4.png}
-\includegraphics[width=16cm]{images/chart5.png}
-\includegraphics[width=16cm]{images/chart6.png}
-\includegraphics[width=16cm]{images/chart7.png}
-\includegraphics[width=16cm]{images/chart8.png}
+Interestingly, algorithm 1 is often the best algorithm. Subsequently, this is also true for the RMSE over all citation types. Algorith one combined wih BP-MLP ends up being the best high-order combinational algorithm. However, in when simple linear regression is used, algorithm 1 ends up being last on the list.
+
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=16cm]{images/chart1.png}
+	\caption{}
+	\label{fig:c1}
+\end{figure}
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=16cm]{images/chart8.png}
+	\caption{}
+	\label{fig:c2}
+\end{figure}
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=16cm]{images/chart3.png}
+	\caption{}
+	\label{fig:c3}
+\end{figure}
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=16cm]{images/chart2.png}
+	\caption{}
+	\label{fig:c4}
+\end{figure}
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=16cm]{images/chart7.png}
+	\caption{}
+	\label{fig:c5}
+\end{figure}
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=16cm]{images/chart6.png}
+	\caption{}
+	\label{fig:c6}
+\end{figure}
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=16cm]{images/chart5.png}
+	\caption{}
+	\label{fig:c7}
+\end{figure}
 
 %\subsection{Best in Each Category}
 %Figures xyz %~\ref{theoreticalCombinedError} 
-%shows the lowest error achieved for each imitation type. 
-\includegraphics[width=16cm]{images/chart9.png}
-\includegraphics[width=12cm]{images/chart10.png}
+%shows the lowest error achieved for each imitation type.
 
-
-\subsection{BP-trained ANN Performance}
+\subsection{BP-trained MLP Performance}
 (xyz fill this in)
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=16cm]{images/chart4.png}
+	\caption{}
+	\label{fig:overall_ml}
+\end{figure}
+
+\begin{figure}[center]
+	\centering
+	\includegraphics[width=12cm]{images/chart10.png}
+	\caption{}
+	\label{fig:perceptron_vs_bp}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %sample helps from previous research
@@ -73,16 +121,3 @@ demonstrate that the various versions of genetic alignment behave differently. T
 
 %The calculated statistic is as follows (equal variance not assumed):
 %$t(7.881)=3.55902, p < 0.00461577$ 
-
-
-%\begin{table}
-%	\begin{center}
-%		\begin{tabular}{|l|c|c|} \hline
-%									& \textbf{Adjectives} 	& \textbf{Nouns}  \\ \hline \hline
-%			\textbf{N} 				& 5						& 5		\\
-%			\hline
-%		\end{tabular}
-%	\end{center}
-%	\caption {Group Statistics.}
-%	\label{tab:female_group_stats}
-%\end{table}
