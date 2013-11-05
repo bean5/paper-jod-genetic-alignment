@@ -3,11 +3,12 @@ Documents were prepared by being parsed and stored. While scripture passages are
 
 The reason that scripture passages are considered to be primary documents is simple: they pre-date the secondary documents, sometimes by centuries. Thus all old documents (scriptural cannon in this case) are collectively grouped as \textit{primary documents} while those that are known to possibly contain imitations of the primary documents are collected as \textit{secondary documents}.
 
-The data is canonicalized, then we run various versions of genetic algorithms over the pairings of imitated and imitator to produce initial alignments. Algorithms are compared by computing their root mean square error (RMSE). The underlying difference between each model is that each differs from another in at least 1 parameter: word order (forward/reverse), and synonymy strictness level (off/1/2/3).
+The data is canonicalized, then we run various versions of genetic algorithms over the pairings of imitated and imitator to produce initial alignments. Algorithms are compared by computing their mean absolute mean (MAE).
+The underlying difference between each model is that each differs from another in at least 1 parameter: word order (forward/reverse), and synonymy strictness level (off/1/2/3).
 
 Second, we feed the output of these algorithms, along with metadata such as \# of matches, \# of indels, etc., into machine learning models: (1) simple regression perceptron, and (2) the regressive version of the back-propagation-trained multi-layer perceptron (BP-MLP). We compare these to determine whether machine learning was beneficial to the alignments. We will refer to (1) as `perceptron' and (2) as BP-MLP.
 
-Third, we use half of the genetic algorithms to produce input into another BP-MLP. This model ends up producing an even better RMSE than any of the genetic alignments used alone as input into a machine learning model.
+Third, we use half of the genetic algorithms to produce input into another BP-MLP. This model ends up producing an even lower error than any of the genetic alignments used alone as input into a machine learning model.
 
 \subsection{Gold Standard}
 \subsubsection{Primary/Imitated Documents}
@@ -42,7 +43,6 @@ Our gold standard also includes the classification of type of imitation. Our typ
 			4						& Lazy quote				\\ \hline
 			5						& Paraphrase				\\ \hline
 			6						& Allusion					\\ \hline
-			7						& Other						\\ \hline
 		\end{tabular}
 	\end{center}
 	
@@ -146,13 +146,15 @@ Weka \cite{weka_2009} was our tool of choice for using our ARFF dataset to perfo
 \subsection{Metric}
 Since our gold standard only contains right ends of alignments, we produce error rates based on those. This does not mean, however, that we do not use the left ends of alignments. Indeed, we could use them as inputs to the BP-MLP as it is a form of meta-data which might be helpful.
 
-Our formula for deriving error is the root mean square error (RMSE):
+We use mean absolute error (MAE) for all errors:
 
 \begin{center}
-	RMSE=$\sqrt{\frac{1}{n}\sum_{i=1}^{n}{(e_i-\overline{e_i})^2}}$
+	%RMSE=$\sqrt{\frac{1}{n}\sum_{i=1}^{n}{(e_i-\overline{e_i})^2}}$
+	MAE=$\frac{1}{n}\sum_{i=1}^{n}{|(e_i-\overline{e_i})|}$
+	%MAE=$\frac{1}{n}\sum_{i=1}^{n}{\abs{e_i-\overline{e_i}}}$
 \end{center}
 
-The RMSE values for machine learning models used here are the errors derived from 10-fold cross-validation.
+For machine learning models, 10-fold cross validation errors are reported.
 
 %\subsubsection{Accuracy vs. Error}
 
