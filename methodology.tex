@@ -146,11 +146,23 @@ Weka \cite{weka_2009} was our tool of choice for using our ARFF dataset to perfo
 \subsection{Metric}
 Since our gold standard only contains right ends of alignments, we produce error rates based on those. This does not mean, however, that we do not use the left ends of alignments. Indeed, we could use them as inputs to the BP-MLP as it is a form of meta-data which might be helpful.
 
-We use mean absolute error (MAE) for all errors. For machine learning models, 10-fold cross validation errors are reported.
+We use mean absolute error (MAE) for all errors. For machine learning models, 10-fold cross validation errors are reported. Table \ref{tab:variable_assignments} shows the assignments of variables in the MAE formula.
 
 \begin{center}
 	MAE=$\frac{1}{n}\sum_{i=1}^{n}{|(e_i-\overline{e_i})|}$
 \end{center}
+
+\begin{table}[center]
+	\centering
+	\begin{tabular} {| l | l |}
+		\hline	\textbf{Variable} 	&	\textbf{Meaning} \\
+		\hline	n					&	id of imitation on page				\\
+		\hline	$e_i$				&	predicted position of imitation $i$	\\
+		\hline	$\overline{e_i}$	&	actual position of imitation $i$	\\ \hline
+	\end{tabular}
+	\caption{Variable Assignments in MAE}
+	\label{tab:variable_assignments}
+\end{table}
 
 %\subsubsection{Accuracy vs. Error}
 
