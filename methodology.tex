@@ -3,20 +3,20 @@ Documents were prepared by being parsed and stored. While scripture passages are
 
 The reason that scripture passages are considered to be primary documents is simple: they pre-date the secondary documents, sometimes by centuries. Thus all old documents (scriptural cannon in this case) are collectively grouped as \textit{primary documents} while those that are known to possibly contain imitations of the primary documents are collected as \textit{secondary documents}.
 
-The data is canonicalized, then we run various versions of genetic algorithms over the pairings of imitated and imitator to produce initial alignments. Algorithms are compared by computing their mean absolute mean (MAE).
+The data is canonicalized, then we run various versions of genetic algorithms over the pairings of imitated and imitator to produce initial alignments. Algorithms are compared by computing their mean absolute error (MAE).
 The underlying difference between each model is that each differs from another in at least 1 parameter: word order (forward/reverse), and synonymy strictness level (off/1/2/3).
 
-Second, we feed the output of these algorithms, along with metadata such as \# of matches, \# of indels, etc., into machine learning models: (1) simple regression perceptron, and (2) the regressive version of the back-propagation-trained multi-layer perceptron (BP-MLP). We compare these to determine whether machine learning was beneficial to the alignments. We will refer to (1) as `perceptron' and (2) as BP-MLP.
+Second, we feed the output of these algorithms, along with metadata such as \# of matches, \# of indels, etc., into machine learning models: (1) simple regression perceptron, and (2) the regressive version of the back-propagation-trained multi-layer perceptron (MLP). We compare these to determine whether machine learning was beneficial to the alignments. We will refer to (1) as `perceptron' and (2) as MLP.
 
-Third, we use half of the genetic algorithms to produce input into another BP-MLP. This model ends up producing an even lower error than any of the genetic alignments used alone as input into a machine learning model.
+Third, we use half of the genetic algorithms to produce input into another MLP. This model ends up producing the lowest error of any in this study.
 
 \subsection{Gold Standard}
 \subsubsection{Primary/Imitated Documents}
 Our primary source documents contained scriptural passages from the following scriptural canons:
 	\begin{itemize}
 		\item \textit{King James Bible},
-		\item \textit{Joseph Smith Translation of the Bible},
-		\item \textit{The Book of Mormon} (LDS\footnote{Acronym for ``The Church of Jesus Christ of Latter-day Saints''. The LDS are sometimes referred to as ``Mormons''.}),
+		\item \textit{Joseph Smith Translation of the Bible} (LDS\footnote{Acronym for ``The Church of Jesus Christ of Latter-day Saints''. The LDS are sometimes referred to as ``Mormons''.}),
+		\item \textit{The Book of Mormon} (LDS),
 		\item \textit{The Doctrine \& Covenants} (LDS), and
 		\item \textit{The Pearl of Great Price} (LDS). 
 	\end{itemize}
@@ -24,7 +24,7 @@ Our primary source documents contained scriptural passages from the following sc
 \subsubsection{Secondary/Imitating Documents}
 As for secondary documents, our documents consisted of all discourses in the \textit{Journal of Discourses} up through volume 10. In total, there are $\JoDPagesTotal$ columns and over $\JoDCitationsTotal$ citations in our gold standard.
 
-Our gold standard contains the right end of the alignments for class for each imitation instance. This, is used as the target for the regression BP-MLP. %The BP-MLP achieves lower error rates for every class and subsequently a lower error rate than any genetic algorithm alone. %This method has promise and could be extended to areas where both ends of the alignment can be used.
+Our gold standard contains the right end of the alignments for class for each imitation instance. This, is used as the target for the regression MLP. %The MLP achieves lower error rates for every class and subsequently a lower error rate than any genetic algorithm alone. %This method has promise and could be extended to areas where both ends of the alignment can be used.
 
 %Our standard also includes labels for class for each imitation instance, which allows us to interpolate, in a way, using a BP MLNN to decrease our error rates. This method has promise and could be extended to areas where both ends of the alignment can be used.
 
@@ -122,7 +122,7 @@ From each alignment, we can derive the following \textbf{meta-data}:
 		\item \textit{average word length within alignment}
 	\end{itemize}
 
-Some of these are redundant in higher order models. For example, given the number of matches, replaces, and indels, the score can be computed. A BP-MLP shouldn't have a problem with a low-order computation like that. In our work, we opt to use the number of matches, number of indels, and the overall score (not replaces) since we found our data for replaces to be corrupt. Admittedly, this could cause a bit of a problem in the simple perceptron, but the BP-MLP should be able to handle it when given sufficient hidden nodes and layers.
+Some of these are redundant in higher order models. For example, given the number of matches, replaces, and indels, the score can be computed. A MLP shouldn't have a problem with a low-order computation like that. In our work, we opt to use the number of matches, number of indels, and the overall score (not replaces) since we found our data for replaces to be corrupt. Admittedly, this could cause a bit of a problem in the simple perceptron, but the MLP should be able to handle it when given sufficient hidden nodes and layers.
 
 \subsubsection{Extrinsic Meta-Data}
 Although we do not leverage the use of extrinsic \textbf{meta-data} in our research here, we believe it is important to note that it exists. Intuition says that such meta-data would be \textit{very} helpful in optimizing our results in future work. Extrinsic meta-data which we had available included:
@@ -138,13 +138,13 @@ Although we do not leverage the use of extrinsic \textbf{meta-data} in our resea
 \subsection{Tools/Parameters for ML Models}
 Weka \cite{weka_2009} was our tool of choice for using our ARFF dataset to perform machine learning. We used the following functions and settings for our ML models:
 \begin{enumerate}
-	\item 10-fold cross validation for both perceptron and BP-MLP
+	\item 10-fold cross validation for both perceptron and MLP
 	\item Perceptron: Simple Linear Regression
-	\item BP-MLP: learning rate of 0.3, 0.2 momentum, and 2000 training time
+	\item MLP: learning rate of 0.3, 0.2 momentum, and 2000 training time
 \end{enumerate}
 
 \subsection{Metric}
-Since our gold standard only contains right ends of alignments, we produce error rates based on those. This does not mean, however, that we do not use the left ends of alignments. Indeed, we could use them as inputs to the BP-MLP as it is a form of meta-data which might be helpful.
+Since our gold standard only contains right ends of alignments, we produce error rates based on those. This does not mean, however, that we do not use the left ends of alignments. Indeed, we could use them as inputs to the MLP as it is a form of meta-data which might be helpful.
 
 We use mean absolute error (MAE) for all errors. For machine learning models, 10-fold cross validation errors are reported. Table \ref{tab:variable_assignments} shows the assignments of variables in the MAE formula.
 

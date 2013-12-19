@@ -27,7 +27,7 @@ Other methods of detecting possible paraphrase include fuzzy searches. Hilton II
 The downside to the algorithm he used is that it was a highly supervised algorithm. It required a lot of parameters to be tested, tweaked, and set. Furthermore, the output often required that Hilton filter the results himself. This is a supervised method at best. Nevertheless, the algorithm did rank results, making it easy for Hilton to simply stop investigating input upon reaching any false positives.
 
 \subsubsection{Intrinsic Author ID}
-Interesting work that could be combined with our methods here including intrinsic author identification. This is the process of identifying which subtexts are least likely to be author by the speaker/writer. One can imigine using this as meta-data input to the BP-MLP that we will describe later.
+Interesting work that could be combined with our methods here including intrinsic author identification. This is the process of identifying which subtexts are least likely to be author by the speaker/writer. One can imigine using this as meta-data input to the MLP that we will describe later.
 
 \subsubsection{Error Rates of Alignments}
 Since much work aims to pair documents as related, sometimes the error rates must take into account up to 4 positions at a time: the left and right end of imitated/imitating text in both documents (2 ends * 2 documents = 4). %The metric for measuring accuracy of any algorithm that aims to do this can be hairy (wc: use other word). One method includes using the BLEU? method.
