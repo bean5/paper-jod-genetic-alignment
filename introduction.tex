@@ -10,11 +10,11 @@ Our primary, or imitable documents, include \textit{The Holy Bible KJV}, \textit
 After determining which version of genetic algorithm works best for each type of imitation, we use the meta-data of the alignments (length, number of matches, number of indels, and number of replaces, etc.) and target (gold standard alignment positions) as input to the training of a neural network. %We found that there were xyz clusters, each corresponding to exact quote, non-exact, paraphrase, or allusion. This empirically demonstrates that given just xyz algorithms, we can discern between types of attribution that is called for. It is not outside the realm of possibilities for future work to use this technique to classify work at run-time before making a conclusion as to the badness of the imitation attempt.
 According to overall error rates, neural networks---both linear and non-linear---outperformed all genetic alignment algorithms. %This was also true with respect to each imitation type.
 
-This study aims to prove the following hypothesis:
+This study aims to prove the following hypotheses:
 	\begin{quote}
-		$H_{1}:$ The error of any of our genetic algorithms is better than the random mean absolute error of 232.%xyz replace with correct number (232 is RMSE)
+		$H_{1}:$ The error of any of our genetic algorithms is better than the random mean absolute error of 160.
 
-		$H_{2}:$ Given output and meta-data of genetic alignments, a neural network can be trained to reduce error rates on imitation alignments than any of them alone.
+		$H_{2}:$ Given genetic alignment meta-data from multiple runs, machine learning models can be trained to reduce error rates on imitation alignments.
 		
 		%$H_{3}:$ Given the meta-data of the text, we can classify the type of imitation with xyz\% accuracy.	
 	\end{quote}

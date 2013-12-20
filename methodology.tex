@@ -76,24 +76,22 @@ The positions of these matches serve as indicators of proposed alignment positio
 %[More on this. Cite it, link to it.]
 
 \subsubsection{Document Reverse}
-The idea behind reversing a document is to allow it to capture paraphrase or out-of-order quoting. Our method is naive and simply reverses the order of the words, but another viable method might be to reverse the order of sentences while maintaining word order within them. We leave this to future work. For type 2 imitations this ends up making a positive difference in error rates.
+The idea behind reversing a document is to allow it to capture paraphrase or out-of-order quoting. Our method is naive and simply reverses the order of the words, but another viable method might be to reverse the order of sentences while maintaining word order within them. We leave this to future work. 
 
-%\subsubsection{Stemming}
-%We use the Java 7 port of Java 6 Porter Stemmer which was available at https://github.com/~bean5/Java-Porter-Stemmer as the Java 6 implementation was buggy in Java 7.
-
-%Stemming allows words of different tenses, but related etymology to count as matches to the genetic algorithm. 
+\subsubsection{Stemming}
+We use the Java 7 port of Java 6 Porter Stemmer which was available at https://github.com/~bean5/Java-Porter-Stemmer as the Java 6 implementation was buggy in Java 7. Stemming allows words of different tenses, but related etymology to count as matches to the genetic algorithm. 
 
 \subsubsection{Synynomy}
 Ideally, synonymy would be as easy as submitting a tuple of words as a query to a thesaurus simply to receive a boolean back. However, this cannot be done with ease, especially when dealing with documents that are older or have wide date mismatches because language often changes over time (synonyms are not exempt). The problem is exascerbated by the fact that without parts of speech or word-sense disambiguation, the correct synset is difficult to locate without using morphological cues. Intuition seems to indicate that such methods would be helpful, but we opted to ignore them and go for various methods of synonymy matching. Since we do not aim to obtain the best single variation of a genetic algorithm, we can simply have various versions of synset matching and allow higher-order machine learning (ML) models learn to ignore that which is not helpful! A further intuition is that upon imitating, an orator might be influenced by an original document in such a way that he/she uses a synonym, hypernym, or hyponym rather than a word itself. The intuition/assumpt here is that by varying strictness of synonymy, each model might end up being better for particular imitation types.
 
-We have 4 versions of synset matching. One is synonymous with synset matching being turned off. Another was built to be very strict, providing low recall at the expense of precision. The remaining 2 simply aimed to be significantly different from being off or strict, providing varying levels of precision and recall. (Optimizing the set of synset matching methods is a topic for future research.) Our levels are as follows:
+We have 4 versions of synset matching. One is synonymous with synset matching being turned off. Another was built to be very strict, providing low recall at the expense of precision. The remaining 2 simply aimed to be significantly different from being off or strict, providing varying levels of precision and recall. (Optimizing the set of synset matching methods is a topic for future research.) %Our levels are as follows:
 
-\begin{description}
-	\item [Level 0]: Word strings must match perfectly to be considered synonyms (i.e. synonymy is turned off)
-	\item [Level 1]: xyz
-	\item [Level 2]: xyz
-	\item [Level 3]: xyz
-\end{description}
+%\begin{description}
+%	\item [Level 0]: Word strings must match perfectly to be considered synonyms (i.e. synonymy is turned off)
+%	\item [Level 1]: xyz
+%	\item [Level 2]: xyz
+%	\item [Level 3]: xyz
+%\end{description}
 
 %\vspace{5mm}
 %\indent{\textit{Words are synonymous iff they share at least 3 hyopnyms and/or hypernyms.}}
@@ -101,7 +99,7 @@ We have 4 versions of synset matching. One is synonymous with synset matching be
 
 \textit{WordNet} \cite{wordnet_1998} was used to query for obtaining synsets---including hypernyms and hyponyms. The WordNet morphology boolean was set to false for all queries. 
 
-Since part of speech tagging and word-sense disambiguation was not performed, the query for synsets always assumed words were nouns. Since this is not the case, we decrease \textit{recall} by blacklisting certain English words---particularly modal verbs. Our blacklist also included strings such as ``\&c.'' (etc.) which appeared to easily be counted as synonyms of words when in fact they were not. Our blacklist is as follows: \textit{has, can, had, might, would, should, will, shall, have....(xyz list all.)}
+Since part of speech tagging and word-sense disambiguation was not performed, the query for synsets always assumed words were nouns. Since this is not the case, we decrease \textit{recall} by blacklisting certain English words---particularly modal verbs. Our blacklist also included strings such as ``\&c.'' (etc.) which appeared to be confounding synonymy by being a synonym to many words. Our blacklist is as follows: \textit{has, can, had, might, would, should, will, shall, have....(xyz list all.)}
 
 
 \subsection{Imitation Data and Meta-data}
@@ -155,9 +153,9 @@ We use mean absolute error (MAE) for all errors. For machine learning models, 10
 \begin{table}[center]
 	\centering
 	\begin{tabular} {| l | l |}
-		\hline	\textbf{Variable} 	&	\textbf{Meaning} \\
-		\hline	n					&	id of imitation on page				\\
-		\hline	$e_i$				&	predicted position of imitation $i$	\\
+		\hline	\textbf{Variable} 	&	\textbf{Meaning} 			\\
+		\hline	n			&	id of imitation on page			\\
+		\hline	$e_i$			&	predicted position of imitation $i$	\\
 		\hline	$\overline{e_i}$	&	actual position of imitation $i$	\\ \hline
 	\end{tabular}
 	\caption{Variable Assignments in MAE}
