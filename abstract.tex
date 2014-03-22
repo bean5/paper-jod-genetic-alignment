@@ -1,11 +1,11 @@
 \clearpage
 \begin {abstract}
-%\textbf{}
 
-The work of author attribution is the subject of research in both secular and non-secular fields. This is true regardless of whether the imitation (plagiarism in extreme cases) is an exact quote, near quote, paraphrase, or even allusion. Herein, we refer to these collectively as \textit{imitations}.% or \textit{citations}.
- We compare various genetic alignment algorithms and their performance with respect to baseline, each other, and with respect to the type of imitation. (Error was always better than baseline and random errors.) We use their output as well as other metadata from their alignments to train a neural network using back-propogation. This model achieves a better accuracy than any 1 of the models alone, achieving an errors as low as 45\% lower than those of baseline error and 50\% lower than random error. 
+The work of author attribution is the subject of research in both secular and non-secular fields. This is true regardless of whether the imitation (plagiarism in extreme cases) is an exact quote, near quote, paraphrase, or even allusion. Herein, we refer to these collectively as \textit{imitations}. 
+
+We compare various genetic alignment algorithms and their performance with respect to baseline, each other, and show stratified results, grouped by type of imitation. We use the output of variations of genetic alignment algorithms metadata to train a machine learning models, including the perceptron, the multi-layer perceptron, and a bagging tree. Error was always better than baseline and random errors. The best machine learning model achieves the best accuracy of all the models, achieving a mean average error 45\% lower than that of baseline error and 50\% lower than random error. 
 
 %Although we do not detect imitations, we align them. 
-We prove that all selected algorithms produce better alignments than the baseline error across all imitation classes. Furthermore, we show that they can be combined in a BP-trained MLP to produce even lower error.
+We prove that all selected algorithms produce better alignments than the baseline error across all imitation classes. Furthermore, we show that by combining the metadata from multiple genetic algorithms as input into machine learning models, the error is reduced.
 
 \end{abstract}
