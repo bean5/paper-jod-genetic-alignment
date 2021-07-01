@@ -1,12 +1,17 @@
-build:
-  build: .
-  command: make project.pdf
-  working_dir: /main
-  volumes:
-    - './:/main'
-shell:
-  build: .
-  command: bash
-  working_dir: /main
-  volumes:
-    - './:/main'
+version: '3'
+
+services:
+  build:
+    build: .
+    command: make
+    working_dir: /main
+    volumes:
+      - './whitepaper:/main'
+      - './output:/output'
+  shell:
+    build: .
+    command: bash
+    working_dir: /main
+    volumes:
+      - './whitepaper:/main'
+      - './output:/output'

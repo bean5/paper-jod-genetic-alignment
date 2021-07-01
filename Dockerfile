@@ -1,5 +1,4 @@
-FROM ubuntu:latest
-MAINTAINER Michael Bean <Bean.Michael2@gmail.com>
+FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y
